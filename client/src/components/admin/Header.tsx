@@ -15,22 +15,19 @@ import {
 import { User, LogOut, Menu } from 'lucide-react';
 
 interface HeaderProps {
-  showMenuButton?: boolean;
-  onMenuClick?: () => void;
+  toggleSidebar: () => void;
 }
 
-export default function Header({ showMenuButton = false, onMenuClick }: HeaderProps) {
+export default function Header({ toggleSidebar }: HeaderProps) {
   return (
     <header className="h-16 border-b border-border bg-card flex items-center justify-between px-3 md:px-6 sticky top-0 z-30">
       <div className="flex items-center gap-2">
-        {showMenuButton && (
-          <Button variant="ghost" size="icon" onClick={onMenuClick} className="mr-1">
-            <Menu className="h-5 w-5" />
-            <span className="sr-only">Toggle menu</span>
-          </Button>
-        )}
+      <button onClick={toggleSidebar} className="md:hidden">
+        {/* Hamburger Icon or any sidebar toggle icon */}
+        ☰
+      </button>
         
-        <Link href="/dashboard" className="font-bold text-lg md:text-xl text-primary flex items-center gap-2">
+        <Link href="/obm-admin/dashboard" className="font-bold text-lg md:text-xl text-primary flex items-center gap-2">
           <span>Absolutely Desi</span>
         </Link>
       </div>

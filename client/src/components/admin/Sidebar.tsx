@@ -10,7 +10,12 @@ import {
   User, 
   Settings,
   ChevronDown,
-  ChevronRight
+  ChevronRight,
+  Package,
+  ShoppingCart,
+  CreditCard,
+  Truck,
+  BarChart3,
 } from 'lucide-react';
 import { useState, useEffect } from 'react';
 
@@ -28,9 +33,29 @@ const navItems: NavItem[] = [
     icon: <Home className="h-5 w-5" />,
   },
   {
-    title: 'Community',
-    href: '/community',
-    icon: <Users className="h-5 w-5" />,
+    title: 'Analytics',
+    href: '/obm-admin/analytics',
+    icon: <BarChart3 className="h-5 w-5" />,
+  },
+  {
+    title: 'Product management',
+    href: '/obm-admin/manage-products',
+    icon: <Package className="h-5 w-5" />,
+  },
+  {
+    title: 'Order management',
+    href: '/obm-admin/manage-orders',
+    icon: <ShoppingCart className="h-5 w-5" />,
+  },
+  {
+    title: 'Payments & Transactions',
+    href: '/obm-admin/payments',
+    icon: <CreditCard className="h-5 w-5" />,
+  },
+  {
+    title: 'Settings',
+    href: '/obm-admin/settings',
+    icon: <Settings className="h-5 w-5" />,
   },
 ];
 
@@ -70,20 +95,18 @@ export default function Sidebar() {
   };
 
   return (
-    <aside className="w-64 md:w-64 border-r border-border bg-card h-full overflow-y-auto">
+    <aside className="w-64 md:w-64 border-r border-border bg-card h-full ">
       <div className="py-4 px-3">
-        {/* Mobile profile info - shown only on mobile when sidebar is open */}
-        {isMobile && (
+        
           <div className="flex items-center mb-6 px-2">
             <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center text-primary mr-3">
               <User className="h-5 w-5" />
             </div>
             <div>
-              <h3 className="font-medium">Student Name</h3>
-              <p className="text-xs text-muted-foreground">student@example.com</p>
+              <h3 className="font-medium">Admin </h3>
+              <p className="text-xs text-muted-foreground">admin@gmail.com</p>
             </div>
           </div>
-        )}
         
         <nav className="space-y-1">
           {navItems.map((item) => {

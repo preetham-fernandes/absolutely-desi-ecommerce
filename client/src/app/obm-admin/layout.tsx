@@ -10,11 +10,12 @@ interface DashboardLayoutProps {
 }
 
 export default function DashboardLayout({ children }: DashboardLayoutProps) {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
       
-      <div className="flex flex-1 h-[calc(100vh-64px)] relative">
+      <div className="flex flex-1 h-[calc(100vh-64px)] ">
         {/* Sidebar */}
         <div>
           <Sidebar />
@@ -22,7 +23,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
         
         {/* Main content */}
         <main className={`flex-1 `}>
-          <Header/>
+          <Header toggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)}/>
           <div className='p-4 md:p-6 overflow-y-auto'>
           {children}
         </div>

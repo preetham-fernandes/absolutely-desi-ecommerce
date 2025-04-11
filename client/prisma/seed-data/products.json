@@ -1,0 +1,114 @@
+{
+  "categories": [
+    {
+      "name": "Sarees",
+      "description": "Traditional Indian sarees in various fabrics and designs"
+    },
+    {
+      "name": "Kurtis",
+      "description": "Stylish and comfortable kurtis for everyday wear"
+    },
+    {
+      "name": "Lehengas",
+      "description": "Elegant lehengas for special occasions and festivals"
+    },
+    {
+      "name": "Men's Kurtas",
+      "description": "Traditional and modern kurtas for men"
+    }
+  ],
+  "products": [
+    {
+      "sku": "SRE-001",
+      "name": "Banarasi Silk Saree",
+      "description": "Handwoven Banarasi silk saree with intricate gold zari work, perfect for weddings and special occasions.",
+      "price": 5999.00,
+      "images": [
+        "https://m.media-amazon.com/images/I/81aNEIukEvL._AC_UL1500_.jpg",
+        "https://5.imimg.com/data5/SELLER/Default/2022/12/PO/SM/KC/16958837/banarasi-silk-saree.jpg"
+      ],
+      "stock": 15,
+      "categoryName": "Sarees"
+    },
+    {
+      "sku": "SRE-002",
+      "name": "Cotton Kalamkari Saree",
+      "description": "Handprinted Kalamkari saree on premium cotton, featuring traditional motifs and earthy colors.",
+      "price": 2499.00,
+      "images": [
+        "https://m.media-amazon.com/images/I/71M0xC0GfZL._AC_UL1500_.jpg"
+      ],
+      "stock": 25,
+      "categoryName": "Sarees"
+    },
+    {
+      "sku": "KRT-001",
+      "name": "Embroidered Anarkali Kurti",
+      "description": "Elegant Anarkali style kurti with mirror work and embroidery, suitable for festive occasions.",
+      "price": 1899.00,
+      "images": [
+        "https://m.media-amazon.com/images/I/71XKCRBgJGL._AC_UL1500_.jpg",
+        "https://m.media-amazon.com/images/I/71MAJXaB64L._AC_UL1500_.jpg"
+      ],
+      "stock": 30,
+      "categoryName": "Kurtis"
+    },
+    {
+      "sku": "KRT-002",
+      "name": "Printed Cotton Straight Kurti",
+      "description": "Comfortable straight-cut cotton kurti with block prints, perfect for daily wear.",
+      "price": 999.00,
+      "images": [
+        "https://m.media-amazon.com/images/I/71+gZbLJmPL._AC_UL1500_.jpg"
+      ],
+      "stock": 50,
+      "categoryName": "Kurtis"
+    },
+    {
+      "sku": "LHG-001",
+      "name": "Bridal Velvet Lehenga",
+      "description": "Luxurious velvet lehenga with heavy embroidery and sequin work, designed for wedding ceremonies.",
+      "price": 12999.00,
+      "images": [
+        "https://m.media-amazon.com/images/I/81rUVw4o3PL._AC_UL1500_.jpg",
+        "https://m.media-amazon.com/images/I/91o0vhSzSuL._AC_UL1500_.jpg"
+      ],
+      "stock": 8,
+      "categoryName": "Lehengas"
+    },
+    {
+      "sku": "LHG-002",
+      "name": "Georgette Party Wear Lehenga",
+      "description": "Lightweight georgette lehenga with contemporary design, ideal for receptions and parties.",
+      "price": 7499.00,
+      "images": [
+        "https://m.media-amazon.com/images/I/61tMCaHc6EL._AC_UL1500_.jpg"
+      ],
+      "stock": 12,
+      "categoryName": "Lehengas"
+    },
+    {
+      "sku": "MKT-001",
+      "name": "Embroidered Silk Kurta",
+      "description": "Premium silk kurta with traditional embroidery, perfect for weddings and festivals.",
+      "price": 3499.00,
+      "images": [
+        "https://m.media-amazon.com/images/I/71H1DgbQyIL._AC_UL1500_.jpg"
+      ],
+      "stock": 20,
+      "categoryName": "Men's Kurtas"
+    },
+    {
+      "sku": "MKT-002",
+      "name": "Cotton Linen Casual Kurta",
+      "description": "Comfortable cotton-linen blend kurta with minimal design, great for casual occasions.",
+      "price": 1299.00,
+      "images": [
+        "https://m.media-amazon.com/images/I/81E0ZT6yJxL._AC_UL1500_.jpg",
+        "https://m.media-amazon.com/images/I/71cdi8XW5xL._AC_UL1500_.jpg"
+      ],
+      "stock": 35,
+      "categoryName": "Men's Kurtas"
+    }
+  ]
+}

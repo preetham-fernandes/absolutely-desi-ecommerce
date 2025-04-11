@@ -1,0 +1,122 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+// User model - represents both guest users and affiliates
+model User {
+  id              Int       @id @default(autoincrement())
+  name            String
+  email           String    @unique
+  phone           String    @unique
+  passwordHash    String?   // For future auth needs beyond OTP
+  isAffiliate     Boolean   @default(false)
+  address         String?   @db.Text
+  city            String?
+  state           String?
+  pincode         String?
+  isActive        Boolean   @default(true)
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  // Relations
+  orders          Order[]
+  otpVerification OtpVerification?
+  catalogDownloads CatalogDownload[]
+}
+
+// OTP verification for authentication
+model OtpVerification {
+  id        Int      @id @default(autoincrement())
+  userId    Int      @unique
+  otp       String
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+// Product categories
+model Category {
+  id          Int       @id @default(autoincrement())
+  name        String    @unique
+  description String?   @db.Text
+  image       String?
+  isActive    Boolean   @default(true)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  
+  // Relations
+  products    Product[]
+}
+
+// Products
+model Product {
+  id          Int       @id @default(autoincrement())
+  sku         String    @unique
+  name        String
+  description String?   @db.Text
+  price       Decimal   @db.Decimal(10, 2)
+  // Affiliate discount is 25% as per project overview
+  affiliatePrice Decimal @db.Decimal(10, 2)
+  images      Json?     // Array of image URLs stored as JSON
+  stock       Int       @default(0)
+  categoryId  Int
+  isActive    Boolean   @default(true)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  
+  // Relations
+  category    Category  @relation(fields: [categoryId], references: [id])
+  orderItems  OrderItem[]
+}
+
+// Orders placed by affiliates
+model Order {
+  id            Int       @id @default(autoincrement())
+  userId        Int
+  orderNumber   String    @unique
+  totalAmount   Decimal   @db.Decimal(10, 2)
+  status        String    @default("pending") // pending, processing, shipped, delivered, cancelled
+  shippingAddress String   @db.Text
+  paymentMethod String
+  paymentStatus String    @default("pending")
+  notes         String?   @db.Text
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  
+  // Relations
+  user          User      @relation(fields: [userId], references: [id])
+  orderItems    OrderItem[]
+}
+
+// Individual items in an order
+model OrderItem {
+  id          Int       @id @default(autoincrement())
+  orderId     Int
+  productId   Int
+  quantity    Int
+  price       Decimal   @db.Decimal(10, 2)
+  createdAt   DateTime  @default(now())
+  
+  // Relations
+  order       Order     @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  product     Product   @relation(fields: [productId], references: [id])
+  
+  @@unique([orderId, productId]) // Prevent duplicate products in same order
+}
+
+// Track catalog downloads by affiliates
+model CatalogDownload {
+  id          Int       @id @default(autoincrement())
+  userId      Int
+  catalogType String    // Type of catalog downloaded (could be category-specific)
+  downloadedAt DateTime @default(now())
+  ipAddress   String?
+  
+  // Relations
+  user        User      @relation(fields: [userId], references: [id])
+}

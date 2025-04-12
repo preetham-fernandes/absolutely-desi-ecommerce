@@ -29,13 +29,13 @@ export function SectionCards() {
             Trending up this month <TrendingUpIcon className="size-4" />
           </div>
           <div className="text-muted-foreground">
-            Visitors for the last 6 months
+            Affiliates for the last 6 months
           </div>
         </CardFooter>
       </Card>
       <Card className="@container/card">
         <CardHeader className="relative">
-          <CardDescription>New Customers</CardDescription>
+          <CardDescription>New Users</CardDescription>
           <CardTitle className="@[250px]/card:text-3xl text-2xl font-semibold tabular-nums">
             1,234
           </CardTitle>
@@ -57,7 +57,7 @@ export function SectionCards() {
       </Card>
       <Card className="@container/card">
         <CardHeader className="relative">
-          <CardDescription>Active Accounts</CardDescription>
+          <CardDescription>Active Affiliates</CardDescription>
           <CardTitle className="@[250px]/card:text-3xl text-2xl font-semibold tabular-nums">
             45,678
           </CardTitle>

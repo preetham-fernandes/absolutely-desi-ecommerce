@@ -6,34 +6,12 @@ import Image from "next/image";
 export function Header() {
   return (
     <header className="fixed top-0 w-full bg-black/95 text-white z-50 shadow-md">
-      <nav className="relative max-w-7xl mx-auto px-6">
-        <div className="flex items-center justify-between h-16">
-          {/* Featured Button */}
-          <Link
-            href="/featured"
-            className="text-white font-medium hover:text-gray-300 pl-4 absolute left-0"
-          >
-            Featured
-          </Link>
-          <div className="hidden sm:flex items-center space-x-6 pl-24">
-            <Link
-              href="/men"
-              className="text-gray-300 hover:text-white px-3 py-2 transition-all"
-            >
-              Men
-            </Link>
-            <Link
-              href="/products/lehenga"
-              className="text-gray-300 hover:text-white px-3 py-2 transition-all"
-            >
-              Women
-            </Link>
-          </div>
-
+      <nav className="relative max-w-full mx-auto px-6">
+        <div className="flex items-center h-16">
           {/* Center Logo */}
           <Link
             href="/"
-            className="absolute left-1/2 transform -translate-x-1/2"
+            className="absolute"
           >
             <Image
               src="/logo_ad.png"
@@ -43,21 +21,49 @@ export function Header() {
               priority
             />
           </Link>
-
-          {/* Right Navigation */}
-          <div className="hidden sm:flex items-center space-x-6 pl-24">
+          
+          <div className="hidden sm:flex items-center justify-center space-x-6 pl-24 ml-56">
+          <Link
+            href="/women"
+            className="text-gray-300 hover:text-white "
+          >
+            Women
+          </Link>
             <Link
               href="/men"
               className="text-gray-300 hover:text-white px-3 py-2 transition-all"
             >
-              Kids
+              Men
             </Link>
             <Link
-              href="/men"
+              href="/boys"
+              className="text-gray-300 hover:text-white px-3 py-2 transition-all"
+            >
+              Boys
+            </Link>
+            <Link
+              href="/girls"
+              className="text-gray-300 hover:text-white px-3 py-2 transition-all"
+            >
+              Girls
+            </Link>
+            <Link
+              href="/accessories"
               className="text-gray-300 hover:text-white px-3 py-2 transition-all"
             >
               Accessories
             </Link>
+            <Link
+              href="/home-wear"
+              className="text-gray-300 hover:text-white px-3 py-2 transition-all"
+            >
+              Home-wear
+            </Link>
+          </div>
+
+          {/* Right Navigation */}
+          <div className="hidden sm:flex items-end justify-end space-x-6 pl-24 ml-auto">
+            
             <Link
               href="/register"
               className="text-gray-300 hover:text-white px-3 py-2 transition-all"

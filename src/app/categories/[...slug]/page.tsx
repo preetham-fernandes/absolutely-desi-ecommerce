@@ -111,7 +111,7 @@ export default async function CategoryPage({ params, searchParams = {} }: Catego
       <nav className="mb-8">
         <ol className="flex text-sm">
           <li className="flex items-center">
-            <Link href="/" className="text-blue-600 hover:underline">
+            <Link href="/" className="text-B2B2B2 hover:underline">
               Home
             </Link>
             <span className="mx-2">/</span>
@@ -120,7 +120,7 @@ export default async function CategoryPage({ params, searchParams = {} }: Catego
             <li key={cat.id} className="flex items-center">
               {index < path.length - 1 ? (
                 <>
-                  <Link href={`/categories/${cat.slug}`} className="text-blue-600 hover:underline">
+                  <Link href={`/categories/${cat.slug}`} className="text-B2B2B2 hover:underline">
                     {cat.name}
                   </Link>
                   <span className="mx-2">/</span>
@@ -135,7 +135,7 @@ export default async function CategoryPage({ params, searchParams = {} }: Catego
 
       <h1 className="text-3xl font-bold mb-6">{category.name}</h1>
 
-      {category.description && <p className="mb-8 text-gray-600">{category.description}</p>}
+      {category.description && <p className="mb-8 text-B2B2B2">{category.description}</p>}
 
       {/* Subcategories */}
       {subcategories.length > 0 && (
@@ -146,7 +146,7 @@ export default async function CategoryPage({ params, searchParams = {} }: Catego
               <Link
                 key={subcat.id}
                 href={`/categories/${subcat.slug}`}
-                className="p-2 border rounded-md hover:bg-gray-50 text-center text-sm transition-colors"
+                className="p-2 border rounded-md hover:bg-F7F7F7 text-center text-sm transition-colors"
               >
                 {subcat.name}
               </Link>
@@ -166,7 +166,7 @@ export default async function CategoryPage({ params, searchParams = {} }: Catego
         <div className="flex-grow">
           <div className="flex justify-between items-center mb-3">
             <h2 className="text-lg font-semibold">Products</h2>
-            <p className="text-gray-600 text-sm">
+            <p className="text-B2B2B2 text-sm">
               Showing {paginatedProducts.length} of {products.length} products
             </p>
           </div>
@@ -197,7 +197,7 @@ export default async function CategoryPage({ params, searchParams = {} }: Catego
                           key={pageNum}
                           href={`?${newParams.toString()}`}
                           className={`px-3 py-1.5 text-sm ${
-                            page === pageNum ? "bg-blue-600 text-white" : "hover:bg-gray-50"
+                            page === pageNum ? "bg-000000 text-white" : "hover:bg-F7F7F7"
                           }`}
                         >
                           {pageNum}
@@ -243,7 +243,7 @@ function ProductCard({ product }: { product: ProductWithVariants }) {
   return (
     <Link href={`/products/${product.slug}`} className="block group">
       <div className="border rounded-lg overflow-hidden hover:shadow-md transition-all duration-200 h-full">
-        <div className="aspect-square relative bg-gray-50">
+        <div className="aspect-square relative bg-F7F7F7">
           {/* Use a div with background image instead of Next.js Image for simplicity */}
           <div
             className="w-full h-full bg-cover bg-top transition-transform duration-300 group-hover:scale-105"
@@ -252,18 +252,17 @@ function ProductCard({ product }: { product: ProductWithVariants }) {
         </div>
 
         <div className="p-3">
-          <h3 className="font-medium text-sm group-hover:text-blue-600 truncate">{product.name}</h3>
+          <h3 className="font-medium text-sm group-hover:text-B2B2B2 truncate">{product.name}</h3>
 
           <div className="mt-1 flex flex-col">
-          <div className="flex items-baseline gap-2">
-  <p className="text-base text-white font-semibold">
-    ₹{affiliatePrice.toFixed(2)}
-  </p>
-  <span className="text-sm text-gray-500 line-through">
-    ₹{regularPrice.toFixed(2)}
-  </span>
-</div>
-
+            <div className="flex items-baseline gap-2">
+              <p className="text-base font-semibold">
+                ₹{affiliatePrice.toFixed(2)}
+              </p>
+              <span className="text-sm text-B2B2B2 line-through">
+                ₹{regularPrice.toFixed(2)}
+              </span>
+            </div>
           </div>
         </div>
       </div>

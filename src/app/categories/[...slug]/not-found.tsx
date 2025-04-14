@@ -4,7 +4,7 @@ export default function NotFound() {
   return (
     <div className="container mx-auto px-4 py-16 text-center">
       <h1 className="text-4xl font-bold mb-4">Category Not Found</h1>
-      <p className="text-gray-600 mb-8">
+      <p className="text-B2B2B2 mb-8">
         Sorry, we couldn't find the category you're looking for.
       </p>
       <div className="space-y-4">
@@ -12,31 +12,31 @@ export default function NotFound() {
         <div className="flex flex-wrap justify-center gap-4 mt-6">
           <Link 
             href="/categories/womens-saree" 
-            className="px-4 py-2 bg-indigo-100 text-indigo-700 rounded hover:bg-indigo-200"
+            className="px-4 py-2 bg-F7F7F7 text-B2B2B2 rounded hover:bg-000000 hover:text-white"
           >
             Women's Sarees
           </Link>
           <Link 
             href="/categories/womens-kurta" 
-            className="px-4 py-2 bg-indigo-100 text-indigo-700 rounded hover:bg-indigo-200"
+            className="px-4 py-2 bg-F7F7F7 text-B2B2B2 rounded hover:bg-000000 hover:text-white"
           >
             Women's Kurtas
           </Link>
           <Link 
             href="/categories/mens-kurta" 
-            className="px-4 py-2 bg-indigo-100 text-indigo-700 rounded hover:bg-indigo-200"
+            className="px-4 py-2 bg-F7F7F7 text-B2B2B2 rounded hover:bg-000000 hover:text-white"
           >
             Men's Kurtas
           </Link>
           <Link 
             href="/categories/girls-jumpsuit" 
-            className="px-4 py-2 bg-indigo-100 text-indigo-700 rounded hover:bg-indigo-200"
+            className="px-4 py-2 bg-F7F7F7 text-B2B2B2 rounded hover:bg-000000 hover:text-white"
           >
             Girls' Jumpsuits
           </Link>
         </div>
         <p className="mt-8">
-          <Link href="/" className="text-indigo-600 hover:underline">
+          <Link href="/" className="text-B2B2B2 hover:underline">
             Return to Homepage
           </Link>
         </p>

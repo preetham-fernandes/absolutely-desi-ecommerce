@@ -1,0 +1,392 @@
+{
+  "categories": [
+    {
+      "id": 1,
+      "parent_id": null,
+      "name": "Women",
+      "description": "Traditional women's clothing",
+      "slug": "womens"
+    },
+    {
+      "id": 2,
+      "parent_id": null,
+      "name": "Men",
+      "description": "Traditional men's clothing",
+      "slug": "mens"
+    },
+    {
+      "id": 3,
+      "parent_id": null,
+      "name": "Kids",
+      "description": null,
+      "slug": "kids"
+    },
+    {
+      "id": 4,
+      "parent_id": 3,
+      "name": "Boys",
+      "description": null,
+      "slug": "boys"
+    },
+    {
+      "id": 5,
+      "parent_id": 3,
+      "name": "Girls",
+      "description": null,
+      "slug": "girls"
+    },
+    {
+      "id": 6,
+      "parent_id": null,
+      "name": "Accessories",
+      "description": null,
+      "slug": "accessories"
+    },
+    {
+      "id": 7,
+      "parent_id": null,
+      "name": "Home-wear",
+      "description": null,
+      "slug": "home-wear"
+    },
+    {
+      "id": 8,
+      "parent_id": 5,
+      "name": "Jewellery",
+      "description": null,
+      "slug": "jewellery"
+    },
+    {
+      "id": 9,
+      "parent_id": 5,
+      "name": "Handbags",
+      "description": null,
+      "slug": "handbags"
+    },
+    {
+      "id": 10,
+      "parent_id": 1,
+      "name": "Saree",
+      "description": null,
+      "slug": "womens-saree"
+    },
+    {
+      "id": 11,
+      "parent_id": 1,
+      "name": "Kurta",
+      "description": null,
+      "slug": "womens-kurta"
+    },
+    {
+      "id": 12,
+      "parent_id": 1,
+      "name": "Lehenga",
+      "description": null,
+      "slug": "womens-lehenga"
+    },
+    {
+      "id": 13,
+      "parent_id": 2,
+      "name": "Kurta",
+      "description": null,
+      "slug": "mens-kurta"
+    },
+    {
+      "id": 14,
+      "parent_id": 2,
+      "name": "Sherwani",
+      "description": null,
+      "slug": "mens-sherwani"
+    },
+    {
+      "id": 15,
+      "parent_id": 2,
+      "name": "Jacket",
+      "description": null,
+      "slug": "mens-jacket"
+    },
+    {
+      "id": 16,
+      "parent_id": 4,
+      "name": "Kurta",
+      "description": null,
+      "slug": "boys-kurta"
+    },
+    {
+      "id": 17,
+      "parent_id": 4,
+      "name": "Sherwani",
+      "description": null,
+      "slug": "boys-sherwani"
+    },
+    {
+      "id": 18,
+      "parent_id": 4,
+      "name": "Shirt",
+      "description": null,
+      "slug": "boys-shirt"
+    },
+    {
+      "id": 19,
+      "parent_id": 5,
+      "name": "Lehenga",
+      "description": null,
+      "slug": "girls-lehenga"
+    },
+    {
+      "id": 20,
+      "parent_id": 5,
+      "name": "Kurta",
+      "description": null,
+      "slug": "girls-kurta"
+    },
+    {
+      "id": 21,
+      "parent_id": 5,
+      "name": "Jumpsuit",
+      "description": null,
+      "slug": "girls-jumpsuit"
+    },
+    {
+      "id": 22,
+      "parent_id": 8,
+      "name": "Earrings",
+      "description": null,
+      "slug": "accessories-earrings"
+    },
+    {
+      "id": 23,
+      "parent_id": 8,
+      "name": "Bangles",
+      "description": null,
+      "slug": "accessories-bangles"
+    },
+    {
+      "id": 24,
+      "parent_id": 9,
+      "name": "Clutches",
+      "description": null,
+      "slug": "handbags-clutches"
+    },
+    {
+      "id": 25,
+      "parent_id": 9,
+      "name": "Sling bags",
+      "description": null,
+      "slug": "handbags-slingbags"
+    },
+    {
+      "id": 26,
+      "parent_id": 7,
+      "name": "Drinkwear",
+      "description": null,
+      "slug": "home-wear-drinkwear"
+    },
+    {
+      "id": 27,
+      "parent_id": 7,
+      "name": "Home-linen",
+      "description": null,
+      "slug": "home-wear-home-linen"
+    }
+  ],
+  "products": [
+    {
+      "id": 1,
+      "categoryId": 21,
+      "name": "PSPeaches Girls Striped Top with Pyjamas",
+      "slug": "girls-jumpsuit-striped-top-with-pyjamas",
+      "description": "Striped Top with Pyjamas",
+      "brand": "PSPeaches",
+      "isActive": true,
+      "material": "Linen",
+      "createdAt": "2025-04-13T00:58:27.152Z",
+      "updatedAt": "2025-04-13T00:58:27.152Z"
+    },
+    {
+      "id": 2,
+      "categoryId": 21,
+      "name": "PSPeaches Girls Tie Dye Top With Trousers",
+      "slug": "girls-jumpsuit-tie-dye-top-with-trousers",
+      "description": "Tie Dye Top With Trousers",
+      "brand": "PSPeaches",
+      "isActive": true,
+      "material": "Linen",
+      "createdAt": "2025-04-13T00:58:27.152Z",
+      "updatedAt": "2025-04-13T00:58:27.152Z"
+    },
+    {
+      "id": 3,
+      "categoryId": 21,
+      "name": "PSPeaches Girls Top with Palazzos",
+      "slug": "girls-jumpsuit-top-with-palazzos",
+      "description": "Top with Palazzos",
+      "brand": "PSPeaches",
+      "isActive": true,
+      "material": "Linen",
+      "createdAt": "2025-04-13T00:58:27.152Z",
+      "updatedAt": "2025-04-13T00:58:27.152Z"
+    },
+    {
+      "id": 4,
+      "categoryId": 21,
+      "name": "PSPeaches Girls Trousers",
+      "slug": "girls-jumpsuit-trousers",
+      "description": "Girls Trousers",
+      "brand": "PSPeaches",
+      "isActive": true,
+      "material": "Linen",
+      "createdAt": "2025-04-13T00:58:27.152Z",
+      "updatedAt": "2025-04-13T00:58:27.152Z"
+    },
+    {
+      "id": 5,
+      "categoryId": 21,
+      "name": "PSPeaches Girls V Neck Top with Palazzos",
+      "slug": "girls-jumpsuit-v-neck-top-with-palazzos",
+      "description": "V Neck Top with Palazzos",
+      "brand": "PSPeaches",
+      "isActive": true,
+      "material": "Linen",
+      "createdAt": "2025-04-13T00:58:27.152Z",
+      "updatedAt": "2025-04-13T00:58:27.152Z"
+    },
+    {
+      "id": 6,
+      "categoryId": 21,
+      "name": "PSPeaches Girls Printed Top Dhoti Pant",
+      "slug": "girls-jumpsuit-v-neck-sleeveless-printed-top-dhoti-pant-clothing-set",
+      "description": "V Neck Sleeveless Printed Top Dhoti Pant Clothing Set",
+      "brand": "PSPeaches",
+      "isActive": true,
+      "material": "Linen",
+      "createdAt": "2025-04-13T00:58:27.152Z",
+      "updatedAt": "2025-04-13T00:58:27.152Z"
+    }
+  ],
+  "productVariants": [
+    {
+      "id": 1,
+      "productId": 1,
+      "sku": "PSP-PINK-8-16Y",
+      "quantity": 25,
+      "basePrice": 1499,
+      "imageUrls": [
+        "https://absolutelydesi.com/wp-content/uploads/2025/03/27952546/pspeaches-Girls-Striped-Top-with-Pyjamas-1.jpg",
+        "https://absolutelydesi.com/wp-content/uploads/2025/03/27952546/pspeaches-Girls-Striped-Top-with-Pyjamas-2.jpg",
+        "https://absolutelydesi.com/wp-content/uploads/2025/03/27952546/pspeaches-Girls-Striped-Top-with-Pyjamas-3.jpg",
+        "https://absolutelydesi.com/wp-content/uploads/2025/03/27952546/pspeaches-Girls-Striped-Top-with-Pyjamas-4.jpg",
+        "https://absolutelydesi.com/wp-content/uploads/2025/03/27952546/pspeaches-Girls-Striped-Top-with-Pyjamas-5.jpg",
+        "https://absolutelydesi.com/wp-content/uploads/2025/03/27952546/pspeaches-Girls-Striped-Top-with-Pyjamas-6.jpg"
+      ],
+      "isActive": true,
+      "size": "8-10Y, 10-12Y, 12-13Y, 13-14Y, 14-15Y, 15-16Y",
+      "color": "Pink",
+      "createdAt": "2025-04-13T00:58:27.152Z",
+      "updatedAt": "2025-04-13T00:58:27.152Z"
+    },
+    {
+        "id": 2,
+        "productId": 2,
+        "sku": "PSP-TIE-DYE-8-16Y",
+        "quantity": 25,
+        "basePrice": 1499,
+        "imageUrls": [
+          "https://absolutelydesi.com/wp-content/uploads/2025/03/27524896/pspeaches-Girls-Tie-Dye-Top-With-Trousers-1.jpg",
+          "https://absolutelydesi.com/wp-content/uploads/2025/03/27524896/pspeaches-Girls-Tie-Dye-Top-With-Trousers-2.jpg",
+          "https://absolutelydesi.com/wp-content/uploads/2025/03/27524896/pspeaches-Girls-Tie-Dye-Top-With-Trousers-3.jpg",
+          "https://absolutelydesi.com/wp-content/uploads/2025/03/27524896/pspeaches-Girls-Tie-Dye-Top-With-Trousers-4.jpg",
+          "https://absolutelydesi.com/wp-content/uploads/2025/03/27524896/pspeaches-Girls-Tie-Dye-Top-With-Trousers-5.jpg",
+          "https://absolutelydesi.com/wp-content/uploads/2025/03/27524896/pspeaches-Girls-Tie-Dye-Top-With-Trousers-6.jpg"
+        ],
+        "isActive": true,
+        "size": "8-10Y, 10-12Y, 12-13Y, 13-14Y, 14-15Y, 15-16Y",
+        "color": "Pink",
+        "createdAt": "2025-04-13T00:58:27.152Z",
+        "updatedAt": "2025-04-13T00:58:27.152Z"
+    },
+    {
+        "id": 3,
+        "productId": 3,
+        "sku": "PSP-PEACH-8-16Y",
+        "quantity": 25,
+        "basePrice": 1499,
+        "imageUrls": [
+          "https://absolutelydesi.com/wp-content/uploads/2025/03/27952550/pspeaches-Girls-Top-with-Palazzos-1.jpg",
+          "https://absolutelydesi.com/wp-content/uploads/2025/03/27952550/pspeaches-Girls-Top-with-Palazzos-2.jpg",
+          "https://absolutelydesi.com/wp-content/uploads/2025/03/27952550/pspeaches-Girls-Top-with-Palazzos-3.jpg",
+          "https://absolutelydesi.com/wp-content/uploads/2025/03/27952550/pspeaches-Girls-Top-with-Palazzos-4.jpg",
+          "https://absolutelydesi.com/wp-content/uploads/2025/03/27952550/pspeaches-Girls-Top-with-Palazzos-5.jpg",
+          "https://absolutelydesi.com/wp-content/uploads/2025/03/27952550/pspeaches-Girls-Top-with-Palazzos-6.jpg"
+        ],
+        "isActive": true,
+        "size": "8-10Y, 10-12Y, 12-13Y, 13-14Y, 14-15Y, 15-16Y",
+        "color": "Peach",
+        "createdAt": "2025-04-13T00:58:27.152Z",
+        "updatedAt": "2025-04-13T00:58:27.152Z"
+      },
+      {
+        "id": 4,
+        "productId": 4,
+        "sku": "PSP-LIGHTPINK-8-16Y",
+        "quantity": 25,
+        "basePrice": 1499,
+        "imageUrls": [
+          "https://absolutelydesi.com/wp-content/uploads/2025/03/27952552/pspeaches-Girls-Trousers-1.jpg",
+          "https://absolutelydesi.com/wp-content/uploads/2025/03/27952552/pspeaches-Girls-Trousers-2.jpg",
+          "https://absolutelydesi.com/wp-content/uploads/2025/03/27952552/pspeaches-Girls-Trousers-3.jpg",
+          "https://absolutelydesi.com/wp-content/uploads/2025/03/27952552/pspeaches-Girls-Trousers-4.jpg",
+          "https://absolutelydesi.com/wp-content/uploads/2025/03/27952552/pspeaches-Girls-Trousers-5.jpg",
+          "https://absolutelydesi.com/wp-content/uploads/2025/03/27952552/pspeaches-Girls-Trousers-6.jpg",
+          "https://absolutelydesi.com/wp-content/uploads/2025/03/27952552/pspeaches-Girls-Trousers-7.jpg"
+        ],
+        "isActive": true,
+        "size": "8-10Y, 10-12Y, 12-13Y, 13-14Y, 14-15Y, 15-16Y",
+        "color": "Light Pink",
+        "createdAt": "2025-04-13T00:58:27.152Z",
+        "updatedAt": "2025-04-13T00:58:27.152Z"
+      },
+      {
+        "id": 5,
+        "productId": 5,
+        "sku": "PSP-Black-8-16Y",
+        "quantity": 25,
+        "basePrice": 1499,
+        "imageUrls": [
+          "https://absolutelydesi.com/wp-content/uploads/2025/03/28267360/pspeaches-Girls-V-Neck-Top-with-Palazzos-1.jpg",
+          "https://absolutelydesi.com/wp-content/uploads/2025/03/28267360/pspeaches-Girls-V-Neck-Top-with-Palazzos-2.jpg",
+          "https://absolutelydesi.com/wp-content/uploads/2025/03/28267360/pspeaches-Girls-V-Neck-Top-with-Palazzos-3.jpg",
+          "https://absolutelydesi.com/wp-content/uploads/2025/03/28267360/pspeaches-Girls-V-Neck-Top-with-Palazzos-4.jpg",
+          "https://absolutelydesi.com/wp-content/uploads/2025/03/28267360/pspeaches-Girls-V-Neck-Top-with-Palazzos-5.jpg",
+          "https://absolutelydesi.com/wp-content/uploads/2025/03/28267360/pspeaches-Girls-V-Neck-Top-with-Palazzos-6.jpg",
+          "https://absolutelydesi.com/wp-content/uploads/2025/03/28267360/pspeaches-Girls-V-Neck-Top-with-Palazzos-7.jpg"
+        ],
+        "isActive": true,
+        "size": "8-10Y, 10-12Y, 12-13Y, 13-14Y, 14-15Y, 15-16Y",
+        "color": "Black",
+        "createdAt": "2025-04-13T00:58:27.152Z",
+        "updatedAt": "2025-04-13T00:58:27.152Z"
+      },
+      {
+        "id": 6,
+        "productId": 6,
+        "sku": "PSP-ORANGE-BLUE-8-16Y",
+        "quantity": 25,
+        "basePrice": 1499,
+        "imageUrls": [
+          "https://absolutelydesi.com/wp-content/uploads/2025/03/28883294/pspeaches-V-Neck-Sleeveless-Printed-Top-Dhoti-Pant-Clothing-Set-1.jpg",
+          "https://absolutelydesi.com/wp-content/uploads/2025/03/28883294/pspeaches-V-Neck-Sleeveless-Printed-Top-Dhoti-Pant-Clothing-Set-2.jpg",
+          "https://absolutelydesi.com/wp-content/uploads/2025/03/28883294/pspeaches-V-Neck-Sleeveless-Printed-Top-Dhoti-Pant-Clothing-Set-3.jpg",
+          "https://absolutelydesi.com/wp-content/uploads/2025/03/28883294/pspeaches-V-Neck-Sleeveless-Printed-Top-Dhoti-Pant-Clothing-Set-4.jpg",
+          "https://absolutelydesi.com/wp-content/uploads/2025/03/28883294/pspeaches-V-Neck-Sleeveless-Printed-Top-Dhoti-Pant-Clothing-Set-5.jpg",
+          "https://absolutelydesi.com/wp-content/uploads/2025/03/28883294/pspeaches-V-Neck-Sleeveless-Printed-Top-Dhoti-Pant-Clothing-Set-6.jpg",
+          "https://absolutelydesi.com/wp-content/uploads/2025/03/28883294/pspeaches-V-Neck-Sleeveless-Printed-Top-Dhoti-Pant-Clothing-Set-7.jpg"
+        ],
+        "isActive": true,
+        "size": "8-10Y, 10-12Y, 12-13Y, 13-14Y, 14-15Y, 15-16Y",
+        "color": "Orange/Blue",
+        "createdAt": "2025-04-13T00:58:27.152Z",
+        "updatedAt": "2025-04-13T00:58:27.152Z"
+      }
+  ]
+}

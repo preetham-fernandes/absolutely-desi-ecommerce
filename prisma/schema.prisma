@@ -39,39 +39,78 @@ model OtpVerification {
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
-// Product categories
 model Category {
   id          Int       @id @default(autoincrement())
-  name        String    @unique
+  parentId    Int?
+  name        String
+  slug        String    @unique
   description String?   @db.Text
-  image       String?
   isActive    Boolean   @default(true)
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
   
-  // Relations
+  // Self-relation for hierarchical categories
+  parent      Category? @relation("CategoryToSubcategories", fields: [parentId], references: [id], onDelete: SetNull)
+  subcategories Category[] @relation("CategoryToSubcategories")
+  
+  // Relation to products
   products    Product[]
+
+  @@map("categories")
 }
 
-// Products
 model Product {
   id          Int       @id @default(autoincrement())
-  sku         String    @unique
-  name        String
-  description String?   @db.Text
-  price       Decimal   @db.Decimal(10, 2)
-  // Affiliate discount is 25% as per project overview
-  affiliatePrice Decimal @db.Decimal(10, 2)
-  images      Json?     // Array of image URLs stored as JSON
-  stock       Int       @default(0)
   categoryId  Int
+  name        String
+  slug        String    @unique
+  description String?   @db.Text
+  brand       String?
   isActive    Boolean   @default(true)
+  material    String?
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
   
   // Relations
-  category    Category  @relation(fields: [categoryId], references: [id])
+  category    Category  @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  variants    ProductVariant[]
+  attributes  ProductAttribute[]
+
+  @@map("products")
+}
+
+model ProductVariant {
+  id          Int       @id @default(autoincrement())
+  productId   Int
+  sku         String    @unique
+  quantity    Int       @default(0)
+  basePrice   Decimal   @db.Decimal(10, 2)
+  imageUrls   Json?     // Stored as JSON array for up to 6 images
+  isActive    Boolean   @default(true)
+  size        String?
+  color       String?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  
+  // Relations
+  product     Product   @relation(fields: [productId], references: [id], onDelete: Cascade)
   orderItems  OrderItem[]
+
+  @@map("product_variants")
+}
+
+model ProductAttribute {
+  id             Int       @id @default(autoincrement())
+  productId      Int
+  attributeName  String    // fabric_type, occasion, work_type, etc.
+  attributeValue String    // cotton, silk, wedding, casual, embroidery, etc.
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+  
+  // Relations
+  product     Product   @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@map("product_attributes")
 }
 
 // Orders placed by affiliates
@@ -92,23 +131,22 @@ model Order {
   user          User      @relation(fields: [userId], references: [id])
   orderItems    OrderItem[]
 }
-
-// Individual items in an order
+// Including referenced OrderItem model for completeness
 model OrderItem {
-  id          Int       @id @default(autoincrement())
-  orderId     Int
-  productId   Int
-  quantity    Int
-  price       Decimal   @db.Decimal(10, 2)
-  createdAt   DateTime  @default(now())
+  id                Int       @id @default(autoincrement())
+  orderId           Int
+  productVariantId  Int
+  unitPrice         Decimal   @db.Decimal(10, 2)
+  totalPrice        Decimal   @db.Decimal(10, 2)
+  quantity          Int
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
   
-  // Relations
-  order       Order     @relation(fields: [orderId], references: [id], onDelete: Cascade)
-  product     Product   @relation(fields: [productId], references: [id])
+  productVariant    ProductVariant @relation(fields: [productVariantId], references: [id])
+  order             Order          @relation(fields: [orderId], references: [id])
   
-  @@unique([orderId, productId]) // Prevent duplicate products in same order
+  @@map("order_items")
 }
-
 // Track catalog downloads by affiliates
 model CatalogDownload {
   id          Int       @id @default(autoincrement())

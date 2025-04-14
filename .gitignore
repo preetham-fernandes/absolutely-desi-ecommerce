@@ -1,6 +1,8 @@
 # Node modules
 node_modules/
 
+/tmp
+
 # Build output
 .next/
 out/

@@ -1,12 +1,12 @@
 import ProductCard from '@/components/ProductCard';
-import prisma from '@/lib/prisma';
+import prisma from '@/lib/db/prisma';
 
 // This would be replaced by your actual authentication check
 // For now, we'll use a dummy function that always returns false
 async function getIsAffiliate() {
   // This would check session/auth in a real implementation
   // For now, isAffiliate is always false as per requirements
-  return false;
+  return true;
 }
 
 export default async function ProductsGrid() {

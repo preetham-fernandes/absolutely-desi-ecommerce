@@ -1,154 +1,247 @@
-"use client"
+"use client";
+import React, { useState } from "react";
+import { useRouter } from "next/navigation";
+import { UserPlus, Download, IndianRupeeIcon, CheckCircle, ArrowRight, Rocket, Mail, Lock, User, Phone, IndianRupee } from "lucide-react";
 
-import { useState } from "react"
-import Link from "next/link"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm } from "react-hook-form"
-import { z } from "zod"
+interface Step {
+  title: string;
+  description: string;
+  icon: React.ElementType;
+  benefits: string[];
+}
 
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
+const steps: Step[] = [
+  {
+    title: "Register as an Affiliate",
+    description: "Join our thriving community of successful affiliates in minutes.",
+    icon: UserPlus,
+    benefits: [
+      "Instant account activation",
+      "Access to affiliate perks"
+    ]
+  },
+  {
+    title: "Browse & Download Catalog",
+    description: "Access our premium ethnic wear collection instantly.",
+    icon: Download,
+    benefits: [
+      "High-resolution product images",
+      "Detailed size guides",
+    ]
+  },
+  {
+    title: "Sell & Earn",
+    description: "Start earning substantial commissions on every sale.",
+    icon: IndianRupeeIcon,
+    benefits: [
+      "Up to 25% commission per sale",
+      "Multiple payout options"
+    ]
+  },
+];
 
-const formSchema = z
-  .object({
-    name: z.string().min(2, {
-      message: "Name must be at least 2 characters.",
-    }),
-    email: z.string().email({
-      message: "Please enter a valid email address.",
-    }),
-    password: z.string().min(8, {
-      message: "Password must be at least 8 characters.",
-    }),
-    confirmPassword: z.string().min(8, {
-      message: "Password must be at least 8 characters.",
-    }),
-    mobile: z.string().min(10, {
-      message: "Please enter a valid mobile number.",
-    }),
-  })
-  .refine((data) => data.password === data.confirmPassword, {
-    message: "Passwords don't match",
-    path: ["confirmPassword"],
-  })
+const Register: React.FC = () => {
+  const router = useRouter();
+  const [formData, setFormData] = useState({
+    fullName: "",
+    email: "",
+    phone: "",
+    password: "",
+    confirmPassword: "",
+  });
 
-export default function RegisterPage() {
-  const [isLoading, setIsLoading] = useState(false)
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
 
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      name: "",
-      email: "",
-      password: "",
-      confirmPassword: "",
-      mobile: "",
-    },
-  })
-
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    setIsLoading(true)
-    // In a real application, you would handle the registration here
-    console.log(values)
-    setTimeout(() => {
-      setIsLoading(false)
-      // Redirect to OTP verification page
-      window.location.href = "/verification"
-    }, 1000)
-  }
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    // Handle form submission
+    try {
+      // your registration logic here
+  
+      // On success, redirect to login
+      router.push("/login");
+    } catch (error) {
+      // handle error
+    }
+  };
 
   return (
-    <div className="container flex h-screen items-center justify-center">
-      <Card className="w-full max-w-md">
-        <CardHeader className="space-y-1">
-          <CardTitle className="text-2xl font-bold">Create an account</CardTitle>
-          <CardDescription>Enter your details below to create your account</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-              <FormField
-                control={form.control}
-                name="name"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Name</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Enter your name" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="email"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Email</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Enter your email" type="email" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="password"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Password</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Create a password" type="password" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="confirmPassword"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Confirm Password</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Confirm your password" type="password" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="mobile"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Mobile Number</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Enter your mobile number" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <Button type="submit" className="w-full" disabled={isLoading}>
-                {isLoading ? "Creating account..." : "Register"}
-              </Button>
-            </form>
-          </Form>
-        </CardContent>
-        <CardFooter className="flex flex-col space-y-4">
-          <div className="text-sm text-center">
-            Already have an account?{" "}
-            <Link href="/login" className="underline text-primary">
-              Login
-            </Link>
+    <div className="min-h-screen flex">
+      {/* Left Side - Affiliate Program Info */}
+      <div className="hidden lg:flex lg:w-1/2 bg-black text-white p-12 flex-col justify-between">
+        <div>
+          {/* <div className="inline-flex items-center gap-2 bg-red-950/30 rounded-full px-4 py-2 mb-6">
+            <Rocket className="w-4 h-4 text-red-500" />
+            <span className="text-sm font-medium">Start Earning Today</span>
+          </div> */}
+          <h2 className="text-4xl font-bold mb-3 bg-clip-text text-transparent bg-gradient-to-r from-red-500 to-red-700">
+            Your Journey to Success
+          </h2>
+          <p className="text-gray-400 text-base mb-8">
+            Join thousands of successful affiliates who are already earning with our program.
+          </p>
+
+          <div className="space-y-4">
+            {steps.map((step, index) => (
+              <div key={step.title} className="bg-red-950/10 backdrop-blur-xl rounded-xl p-6 border border-red-500/20 transition-colors">
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 bg-gradient-to-br from-red-600 to-red-800 rounded-lg flex items-center justify-center shrink-0">
+                    <step.icon className="w-6 h-6 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-semibold mb-2 text-white">{step.title}</h3>
+                    <p className="text-gray-400 text-sm mb-4">{step.description}</p>
+                    <div className="space-y-2">
+                      {step.benefits.map((benefit, i) => (
+                        <div key={i} className="flex items-center gap-2 text-sm text-gray-300">
+                          <CheckCircle className="w-4 h-4 text-red-500" />
+                          <span>{benefit}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
-        </CardFooter>
-      </Card>
+        </div>
+
+        <div className="mt-8 flex items-center gap-4 text-sm text-gray-400">
+          <span>Already earning with us?</span>
+          <button className="text-red-500 hover:text-red-400 transition-colors">
+            View success stories
+          </button>
+        </div>
+      </div>
+
+      {/* Right Side - Registration Form */}
+      <div className="w-full lg:w-1/2 bg-zinc-950 px-12 py-3 flex items-center justify-center">
+        <div className="w-full max-w-md">
+          <div className="text-center mb-8">
+            <h2 className="text-3xl font-bold text-white mb-2">Create Your Account</h2>
+            <p className="text-gray-400">Start your journey as an affiliate partner</p>
+          </div>
+
+          <form onSubmit={handleSubmit} className="space-y-6">
+            <div>
+              <label className="block text-sm font-medium text-gray-200 mb-2" htmlFor="fullName">
+                Full Name
+              </label>
+              <div className="relative">
+                <User className="w-5 h-5 text-gray-500 absolute left-3 top-1/2 -translate-y-1/2" />
+                <input
+                  type="text"
+                  id="fullName"
+                  name="fullName"
+                  value={formData.fullName}
+                  onChange={handleChange}
+                  className="w-full pl-10 pr-4 py-3 bg-zinc-900 border border-zinc-800 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 text-white placeholder-gray-500"
+                  placeholder="Enter your full name"
+                  required
+                />
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-200 mb-2" htmlFor="email">
+                Email Address
+              </label>
+              <div className="relative">
+                <Mail className="w-5 h-5 text-gray-500 absolute left-3 top-1/2 -translate-y-1/2" />
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  className="w-full pl-10 pr-4 py-3 bg-zinc-900 border border-zinc-800 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 text-white placeholder-gray-500"
+                  placeholder="Enter your email"
+                  required
+                />
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-200 mb-2" htmlFor="phone">
+                Phone Number
+              </label>
+              <div className="relative">
+                <Phone className="w-5 h-5 text-gray-500 absolute left-3 top-1/2 -translate-y-1/2" />
+                <input
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  value={formData.phone}
+                  onChange={handleChange}
+                  className="w-full pl-10 pr-4 py-3 bg-zinc-900 border border-zinc-800 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 text-white placeholder-gray-500"
+                  placeholder="Enter your phone number"
+                  required
+                />
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-200 mb-2" htmlFor="password">
+                Password
+              </label>
+              <div className="relative">
+                <Lock className="w-5 h-5 text-gray-500 absolute left-3 top-1/2 -translate-y-1/2" />
+                <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  value={formData.password}
+                  onChange={handleChange}
+                  className="w-full pl-10 pr-4 py-3 bg-zinc-900 border border-zinc-800 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 text-white placeholder-gray-500"
+                  placeholder="Create a password"
+                  required
+                />
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-200 mb-2" htmlFor="confirmPassword">
+                Confirm Password
+              </label>
+              <div className="relative">
+                <Lock className="w-5 h-5 text-gray-500 absolute left-3 top-1/2 -translate-y-1/2" />
+                <input
+                  type="password"
+                  id="confirmPassword"
+                  name="confirmPassword"
+                  value={formData.confirmPassword}
+                  onChange={handleChange}
+                  className="w-full pl-10 pr-4 py-3 bg-zinc-900 border border-zinc-800 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 text-white placeholder-gray-500"
+                  placeholder="Confirm your password"
+                  required
+                />
+              </div>
+            </div>
+
+            <button
+              type="submit"
+              className="w-full bg-gradient-to-r from-red-600 to-red-800 text-white py-3 rounded-lg font-medium hover:from-red-700 hover:to-red-900 transition-all duration-300 flex items-center justify-center gap-2"
+            >
+              Create Account
+              <ArrowRight className="w-5 h-5" />
+            </button>
+          </form>
+
+          <p className="mt-6 text-center text-gray-400">
+            Already have an account?{" "}
+            <button className="text-red-500 hover:text-red-400 font-medium">
+              Sign in
+            </button>
+          </p>
+        </div>
+      </div>
     </div>
-  )
-}
+  );
+};
+
+export default Register;

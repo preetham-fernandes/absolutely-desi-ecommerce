@@ -5,21 +5,15 @@ import Image from "next/image";
 
 export function Header() {
   return (
-    <header className="fixed top-0 w-full bg-black/95 text-white z-50 shadow-md">
-      <nav className="relative max-w-full mx-auto px-6">
+    <header className="fixed top-0 w-full bg-black bg-opacity-80 text-white z-50 shadow-md">
+      <nav className="relative max-w-full mx-auto px-6 py-1">
         <div className="flex items-center h-16">
           {/* Center Logo */}
           <Link
             href="/"
-            className="absolute"
+            className="absolute font-serif text-2xl text-white"
           >
-            <Image
-              src="/logo_ad.png"
-              alt="Absolutely Desi Logo"
-              width={200}
-              height={50}
-              priority
-            />
+            ABSOLUTELY DESI
           </Link>
           
           <div className="hidden sm:flex items-center justify-center space-x-6 pl-24 ml-56">
@@ -42,7 +36,7 @@ export function Header() {
               Boys
             </Link>
             <Link
-              href="/girls"
+              href="/categories/girls"
               className="text-gray-300 hover:text-white px-3 py-2 transition-all"
             >
               Girls

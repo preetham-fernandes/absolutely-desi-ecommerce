@@ -3,6 +3,7 @@
 
 import React from "react";
 import { Header } from "@/components/mainpageC/Header";
+import {Carousel} from "@/components/mainpageC/Carousel"
 import { Hero } from "@/components/mainpageC/Hero";
 import { FeaturedCategories } from "@/components/mainpageC/FeaturedCategories";
 import { HowItWorks } from "@/components/mainpageC/HowItWorks";
@@ -15,8 +16,11 @@ const App: React.FC = () => {
   return (
     <div className="min-h-screen bg-white">
       <Header />
-      <Hero />
+      <Hero/>
+      
+      
       <FeaturedCategories />
+      <Carousel/>
       <HowItWorks />
       <NewArrivals />
       <Testimonials />

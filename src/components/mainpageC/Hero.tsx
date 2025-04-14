@@ -6,10 +6,10 @@ export function Hero() {
        <div 
         className="absolute inset-0 bg-cover bg-center"
         style={{ 
-          backgroundImage: "url('/bg1.png')",
+          backgroundImage: "url('/cbg.png')",
           backgroundSize: "cover", // Ensures the image covers the entire div
           backgroundPosition: "center", // Centers the image
-          backgroundRepeat: "no-repeat" // Prevents repetition
+          backgroundRepeat: "initial" // Prevents repetition
         }}
       >
         <div className="absolute inset-0 " />
@@ -31,7 +31,7 @@ export function Hero() {
       <span key={i} className="mx-3"> {/* Reduced margin */}
         END OF SEASON SALE IS LIVE 
         <span className="mx-4"> {/* Reduced spacing */}
-          USE CODE - WELCOME FOR 10% OFF
+          25% OFF FOR AFFILIATES 
         </span>
       </span>
     ))}

@@ -3,9 +3,9 @@ import React, { useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const carouselImages: string[] = [
-  "/bg.png",
-  "https://images.unsplash.com/photo-1583391733956-6c78dd16ea25?auto=format&fit=crop&q=80&w=2000",
-  "https://images.unsplash.com/photo-1623002071765-5a769682bf59?auto=format&fit=crop&q=80&w=2000",
+  "/cbg4.png",
+  "/cbg2.png",
+  "/cbg5.png",
 ];
 
 export const Carousel: React.FC = () => {

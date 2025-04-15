@@ -17,8 +17,6 @@ const App: React.FC = () => {
     <div className="min-h-screen bg-white">
       <Header />
       <Hero/>
-      
-      
       <FeaturedCategories />
       <Carousel/>
       <HowItWorks />

@@ -19,7 +19,10 @@ export function NavItem({ title, href, megaMenu }: NavItemProps) {
     <div className="relative group" onMouseEnter={() => setIsOpen(true)} onMouseLeave={() => setIsOpen(false)}>
       <Link
         href={href}
-        className={cn("text-gray-300 hover:text-white flex items-center transition-all", isOpen && "text-white")}
+        className={cn(
+          "text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white flex items-center transition-all", 
+          isOpen && "text-black dark:text-white"
+        )}
       >
         {title}
         {megaMenu && (

@@ -5,6 +5,7 @@ import categoryService from "@/lib/services/categoryService"
 import productService from "@/lib/services/productService"
 import ProductFilters from "@/components/ProductFilters"
 import { Strikethrough } from "lucide-react"
+import { ThemeToggle } from "@/components/providers/theme-toggle"
 
 interface CategoryPageProps {
   params: {
@@ -107,6 +108,9 @@ export default async function CategoryPage({ params, searchParams = {} }: Catego
 
   return (
     <div className="container mx-auto px-4 py-6">
+      <div className="flex justify-end mb-4">
+        <ThemeToggle />
+      </div>
       {/* Breadcrumbs */}
       <nav className="mb-8">
         <ol className="flex text-sm">

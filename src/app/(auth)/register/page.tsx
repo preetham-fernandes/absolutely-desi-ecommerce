@@ -64,7 +64,7 @@ const Register: React.FC = () => {
       // your registration logic here
   
       // On success, redirect to login
-      router.push("/login");
+      router.push("/verification");
     } catch (error) {
       // handle error
     }

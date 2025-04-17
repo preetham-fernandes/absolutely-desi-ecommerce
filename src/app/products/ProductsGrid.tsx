@@ -21,6 +21,12 @@ export default async function ProductsGrid() {
           name: true,
         },
       },
+      variants: {
+        where: {
+          isActive: true,
+        },
+        take: 1, // Get the first active variant
+      },
     },
     orderBy: {
       name: 'asc',
@@ -30,8 +36,11 @@ export default async function ProductsGrid() {
   // Convert Prisma Decimal objects to JavaScript numbers
   const products = productsFromDb.map(product => ({
     ...product,
-    price: Number(product.price),
-    affiliatePrice: Number(product.affiliatePrice)
+    sku: product.variants[0]?.sku || '',
+    images: product.variants[0]?.imageUrls ? JSON.parse(product.variants[0].imageUrls as string) : [],
+    stock: product.variants[0]?.quantity || 0,
+    price: Number(product.variants[0]?.basePrice || 0),
+    affiliatePrice: Number(product.variants[0]?.basePrice || 0) // For now, using same price
   }));
 
   // Check if user is an affiliate

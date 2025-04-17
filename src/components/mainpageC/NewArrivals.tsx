@@ -24,14 +24,14 @@ const newArrivals: Product[] = [
 
 export const NewArrivals: React.FC = () => {
   return (
-    <section className="py-16 bg-gray-50 text-black">
+    <section className="py-16 bg-gray-50 dark:bg-black text-black dark:text-white">
       <div className="container mx-auto px-4">
         <h2 className="text-3xl font-bold text-start mb-12">SHOP BY CATEGORY</h2>
         <div className="grid md:grid-cols-6 gap-8">
           {newArrivals.map((product) => (
             <div
               key={product.name}
-              className="bg-white rounded-2xl overflow-hidden shadow-lg"
+              className="bg-white dark:bg-black rounded-2xl overflow-hidden shadow-lg"
             >
               <img
                 src={product.image}
@@ -39,8 +39,8 @@ export const NewArrivals: React.FC = () => {
                 className="w-full h-52 object-cover"
               />
               <div className="p-4">
-                <h3 className="text-xl font-serif mb-2">{product.name}</h3>
-                <p className="text-maroon-600 font-normal mb-4">
+                <h3 className="text-xl font-serif mb-2 dark:text-white">{product.name}</h3>
+                <p className="text-maroon-600 dark:text-maroon-600 font-normal mb-4">
                   {product.price}
                 </p>
               </div>

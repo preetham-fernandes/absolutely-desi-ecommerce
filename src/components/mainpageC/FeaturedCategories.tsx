@@ -39,12 +39,12 @@ const categories: Category[] = [
 
 export const FeaturedCategories: React.FC = () => {
   return (
-    <section className="py-16 bg-gradient-to-b from-gray-50 to-white text-gray-800">
+    <section className="py-16 bg-gradient-to-b from-gray-50 to-white dark:from-black dark:to-black text-gray-800 dark:text-gray-200">
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center mb-12">
           <div>
             <h2 className="text-4xl font-serif mb-2">Discover yourself</h2>
-            <p className="text-gray-600">Our curated collection for every style</p>
+            <p className="text-gray-600 dark:text-gray-400">Our curated collection for every style</p>
           </div>
         </div>
 

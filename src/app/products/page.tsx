@@ -1,7 +1,7 @@
 import { Suspense } from 'react';
 import ProductsGrid from './ProductsGrid';
 import { Skeleton } from '@/components/ui/skeleton';
-
+import { ThemeToggle } from '@/components/providers/theme-toggle';
 export const metadata = {
   title: 'Products | Absolutely Desi',
   description: 'Browse our collection of Indian ethnic wear.'
@@ -24,6 +24,9 @@ export default function ProductsPage() {
 function ProductsGridSkeleton() {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+       <div className="flex justify-end mb-6">
+                <ThemeToggle />
+              </div>
       {Array(8).fill(0).map((_, i) => (
         <div key={i} className="space-y-3">
           <Skeleton className="h-[200px] w-full rounded-lg" />

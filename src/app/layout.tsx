@@ -1,22 +1,11 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
 import "./globals.css";
-import { ThemeProvider } from "@/components/providers/theme-provider"
-
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
-});
+import { geistSans, geistMono, georgia, montserrat } from "@/lib/fonts";
 
 export const metadata: Metadata = {
-  title: "Absolutely Desi",
-  description: "Ecommerce Store for Indian wear",
+  title: "Absolutely Desi - Authentic Indian Ethnic Wear",
+  description: "Premium affiliate marketplace for authentic Indian ethnic wear",
+  keywords: "Indian clothing, ethnic wear, saree, lehenga, kurta, affiliate marketing",
 };
 
 export default function RootLayout({
@@ -25,18 +14,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="dark">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${georgia.variable} ${montserrat.variable} antialiased bg-black text-white`}
       >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          {children}
-        </ThemeProvider>
+        {children}
       </body>
     </html>
   );

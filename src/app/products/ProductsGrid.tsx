@@ -1,5 +1,6 @@
 import ProductCard from '@/components/ProductCard';
 import prisma from '@/lib/db/prisma';
+import { ThemeToggle } from '@/components/providers/theme-toggle';
 
 // This would be replaced by your actual authentication check
 // For now, we'll use a dummy function that always returns false

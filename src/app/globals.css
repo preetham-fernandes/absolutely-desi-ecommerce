@@ -8,10 +8,9 @@
   }
 }
 
-
-
 @layer base {
   :root {
+    /* Original theme colors */
     --background: 0 0% 100%;
     --foreground: 0 0% 3.9%;
     --card: 0 0% 100%;
@@ -45,7 +44,16 @@
     --sidebar-accent-foreground: 240 5.9% 10%;
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 217.2 91.2% 59.8%;
+
+    /* Absolutely Desi custom colors */
+    --bangladesh-green: 178 95% 19%;
+    --bangladesh-green-foreground: 0 0% 100%;
+    --tan: 34 45% 69%; /* Updated to #D2B48C */
+    --tan-foreground: 0 0% 0%;
+    --luxury-black: 0 0% 0%;
+    --luxury-black-foreground: 0 0% 100%;
   }
+  
   .dark {
     --background: 0 0% 3.9%;
     --foreground: 0 0% 98%;
@@ -79,10 +87,16 @@
     --sidebar-accent-foreground: 240 4.8% 95.9%;
     --sidebar-border: 240 3.7% 15.9%;
     --sidebar-ring: 217.2 91.2% 59.8%;
+
+    /* Absolutely Desi custom colors - dark mode */
+    --bangladesh-green: 178 95% 19%;
+    --bangladesh-green-foreground: 0 0% 100%;
+    --tan: 34 45% 69%; /* Updated to #D2B48C */
+    --tan-foreground: 0 0% 0%;
+    --luxury-black: 0 0% 0%;
+    --luxury-black-foreground: 0 0% 100%;
   }
 }
-
-
 
 @layer base {
   * {
@@ -91,4 +105,60 @@
   body {
     @apply bg-background text-foreground;
   }
+  
+  /* Font styling for headings and text */
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif;
+  }
+}
+
+/* Luxury styling components */
+@layer components {
+  .luxury-container {
+    @apply container mx-auto px-4 md:px-8 lg:px-12;
+  }
+
+  .luxury-section {
+    @apply py-16 md:py-24;
+  }
+
+  .luxury-header {
+    @apply text-4xl md:text-5xl lg:text-6xl font-serif font-bold tracking-wide text-bangladesh-green dark:text-white;
+  }
+
+  .luxury-subheader {
+    @apply text-2xl md:text-3xl font-serif text-gray-800 dark:text-gray-200;
+  }
+
+  .luxury-button {
+    @apply bg-bangladesh-green text-white font-medium px-6 py-3 rounded-none hover:bg-opacity-90 transition-all duration-300 flex items-center gap-2;
+  }
+
+  .luxury-button-outline {
+    @apply border border-bangladesh-green text-bangladesh-green dark:border-white dark:text-white px-6 py-3 rounded-none hover:bg-bangladesh-green hover:text-white dark:hover:bg-white dark:hover:text-black transition-all;
+  }
+
+  .luxury-card {
+    @apply bg-white dark:bg-gray-900 shadow-lg overflow-hidden border border-gray-200 dark:border-gray-800 transition-all duration-300 hover:shadow-xl;
+  }
+  
+  .luxury-overlay {
+    @apply absolute inset-0 bg-bangladesh-green/30 dark:bg-black/50 transition-opacity duration-300;
+  }
+}
+
+/* Custom animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.8s ease-in forwards;
 }

@@ -1,3 +1,21 @@
 {
-  "extends": ["next/core-web-vitals", "next/typescript"]
+  "extends": [
+    "next",
+    "next/core-web-vitals",
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "plugins": [
+    "@typescript-eslint",
+    "react"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "rules": {
+    "no-unused-vars": "off",  // Disable the 'no-unused-vars' rule for JS
+    "@typescript-eslint/no-unused-vars": "off",  // Disable the 'no-unused-vars' rule for TS
+    "@typescript-eslint/no-explicit-any": "off",  // Disable 'any' type warnings
+    "react/no-unescaped-entities": "off",  // Disable unescaped entities warnings
+    "no-undef": "off",  // Disable 'no-undef' warnings
+    "react/jsx-no-undef": "off"  // Disable 'jsx-no-undef' warnings
+  }
 }

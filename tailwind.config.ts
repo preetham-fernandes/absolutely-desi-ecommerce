@@ -6,6 +6,9 @@ const config: Config = {
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
+    "./components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
     extend: {
@@ -59,7 +62,59 @@ const config: Config = {
           'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
           border: 'hsl(var(--sidebar-border))',
           ring: 'hsl(var(--sidebar-ring))'
-        }
+        },
+        // Absolutely Desi custom colors
+        'bangladesh-green': {
+          DEFAULT: 'hsl(var(--bangladesh-green))',
+          foreground: 'hsl(var(--bangladesh-green-foreground))'
+        },
+        'tan': {
+          DEFAULT: 'hsl(var(--tan))', // Now represents #D2B48C
+          foreground: 'hsl(var(--tan-foreground))'
+        },
+        'luxury-black': {
+          DEFAULT: 'hsl(var(--luxury-black))',
+          foreground: 'hsl(var(--luxury-black-foreground))'
+        },
+        // Additional grayscale for luxury design
+        'gray': {
+          50: '#F7F7F7',
+          100: '#E6E6E6',
+          200: '#CCCCCC',
+          300: '#B2B2B2',
+          400: '#999999',
+          500: '#7F7F7F',
+          600: '#666666',
+          700: '#4C4C4C',
+          800: '#333333',
+          900: '#191919',
+        },
+        // Maroon color used in some components
+        'maroon': {
+          600: '#800000',
+          700: '#600000',
+        },
+      },
+      fontFamily: {
+        sans: [
+          'var(--font-geist-sans)',
+          'var(--font-montserrat)',
+          'Montserrat',
+          'ui-sans-serif', 
+          'system-ui',
+          'sans-serif'
+        ],
+        serif: [
+          'var(--font-georgia)',
+          'Georgia', 
+          'ui-serif', 
+          'serif'
+        ],
+        mono: [
+          'var(--font-geist-mono)',
+          'ui-monospace', 
+          'monospace'
+        ],
       },
       borderRadius: {
         lg: 'var(--radius)',
@@ -67,13 +122,21 @@ const config: Config = {
         sm: 'calc(var(--radius) - 4px)'
       },
       animation: {
-        marquee: 'marquee 20s linear infinite',
+        marquee: 'marquee 25s linear infinite',
+        'fade-in': 'fadeIn 0.8s ease-in forwards',
       },
       keyframes: {
         marquee: {
-          '0%': { transform: 'translateX(100%)' },
+          '0%': { transform: 'translateX(0%)' },
           '100%': { transform: 'translateX(-100%)' },
         },
+        fadeIn: {
+          'from': { opacity: '0', transform: 'translateY(20px)' },
+          'to': { opacity: '1', transform: 'translateY(0)' },
+        },
+      },
+      backgroundImage: {
+        'hero-pattern': "url('/cbg.png')",
       },
     },
   },

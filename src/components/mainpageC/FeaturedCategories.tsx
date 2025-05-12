@@ -1,4 +1,3 @@
-// components/FeaturedCategories.tsx
 import React from "react";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
@@ -39,34 +38,48 @@ const categories: Category[] = [
 
 export const FeaturedCategories: React.FC = () => {
   return (
-    <section className="py-16 bg-gradient-to-b from-gray-50 to-white dark:from-black dark:to-black text-gray-800 dark:text-gray-200">
-      <div className="container mx-auto px-4">
-        <div className="flex justify-between items-center mb-12">
-          <div>
-            <h2 className="text-4xl font-serif mb-2">Discover yourself</h2>
-            <p className="text-gray-600 dark:text-gray-400">Our curated collection for every style</p>
+    <section className="py-24 bg-black">
+      <div className="container mx-auto px-4 md:px-8">
+        <div className="flex flex-col md:flex-row justify-between items-center md:items-end mb-16">
+          <div className="mb-8 md:mb-0">
+            <h2 className="text-4xl md:text-5xl font-serif mb-4 text-tan">
+              Discover Our Collections
+            </h2>
+            <p className="text-gray-300 max-w-xl">
+              Explore authentic Indian ethnic wear curated for every occasion and style
+            </p>
           </div>
+          
+          <Link 
+            href="/categories" 
+            className="flex items-center text-white hover:text-tan"
+          >
+            View All Categories <ArrowRight className="ml-2 h-4 w-4" />
+          </Link>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
           {categories.map((category) => (
-            <Link key={category.name} href={category.link} passHref>
-              <div className="group cursor-pointer">
-                <div className="relative h-[400px] md:h-[450px] rounded-2xl overflow-hidden shadow-lg transition-all duration-300 group-hover:shadow-xl">
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent z-10" />
-                  <img
-                    src={category.image}
-                    alt={category.name}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                  />
-                  <div className="absolute bottom-0 left-0 right-0 p-6 z-20 transform translate-y-2 opacity-90 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
-                    <h3 className="text-2xl font-serif text-white mb-2">{category.name}</h3>
-                    <div className="flex items-center justify-between">
-                      <span className="text-white flex items-center gap-1 text-sm">
-                        Shop Now
-                        <ArrowRight className="w-4 h-4" />
-                      </span>
-                    </div>
+            <Link key={category.name} href={category.link}>
+              <div className="group cursor-pointer overflow-hidden relative h-[450px] border border-gray-800">
+                {/* Background gradient overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent z-10 transition-opacity duration-500 group-hover:opacity-90" />
+                
+                {/* Image */}
+                <img
+                  src={category.image}
+                  alt={category.name}
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                />
+                
+                {/* Content */}
+                <div className="absolute bottom-0 left-0 w-full p-8 z-20 transform translate-y-2 transition-transform duration-500 group-hover:translate-y-0">
+                  <div className="flex flex-col items-start">
+                    <h3 className="text-3xl font-serif text-tan mb-3">{category.name}</h3>
+                    <span className="text-white/80 text-sm mb-4">{category.itemCount} items</span>
+                    <span className="flex items-center text-white border-b border-tan pb-1 transition-all duration-300 transform translate-x-0 group-hover:translate-x-2 group-hover:text-tan">
+                      Discover <ArrowRight className="ml-2 h-4 w-4" />
+                    </span>
                   </div>
                 </div>
               </div>

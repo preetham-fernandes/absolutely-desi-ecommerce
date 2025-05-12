@@ -54,3 +54,8 @@ tsconfig.tsbuildinfo
 
 # AWS Cognito files (if any are generated locally and shouldn't be tracked)
 .aws/
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml

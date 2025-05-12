@@ -1,6 +1,7 @@
+"use client";
+
 import React from "react";
 import { Header } from "@/components/mainpageC/Header";
-import {Carousel} from "@/components/mainpageC/Carousel"
 import { Hero } from "@/components/mainpageC/Hero";
 import { FeaturedCategories } from "@/components/mainpageC/FeaturedCategories";
 import { HowItWorks } from "@/components/mainpageC/HowItWorks";
@@ -9,20 +10,19 @@ import { Testimonials } from "@/components/mainpageC/Testimonials";
 import { CTABanner } from "@/components/mainpageC/CTABanner";
 import { Footer } from "@/components/mainpageC/Footer";
 
-const App: React.FC = () => {
+const Home: React.FC = () => {
   return (
-    <div className="min-h-screen bg-white">
+    <main className="min-h-screen bg-black">
       <Header />
-      <Hero/>
+      <Hero />
       <FeaturedCategories />
-      <Carousel/>
       <HowItWorks />
       <NewArrivals />
       <Testimonials />
       <CTABanner />
       <Footer />
-    </div>
+    </main>
   );
 };
 
-export default App;
+export default Home;

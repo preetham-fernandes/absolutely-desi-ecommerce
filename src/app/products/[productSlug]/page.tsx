@@ -58,7 +58,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
             {product.category?.parent && (
               <li className="flex items-center">
                 <Link
-                  href={`/categories/${product.category.parent.slug}`}
+                  href={`/${product.category.parent.slug}`}
                   className="text-muted-foreground hover:text-foreground transition-colors"
                 >
                   {product.category.parent.name}
@@ -68,7 +68,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
             )}
             <li className="flex items-center">
               <Link
-                href={`/categories/${product.category?.slug}`}
+                href={`/${product.category?.slug}`}
                 className="text-muted-foreground hover:text-foreground transition-colors"
               >
                 {product.category?.name}
@@ -184,8 +184,8 @@ export default async function ProductPage({ params }: ProductPageProps) {
                   buttonText="Download Catalog"
                   className="w-full px-6 py-3 bg-muted text-foreground rounded-lg hover:bg-muted/80 flex items-center justify-center gap-2"
                 >
-                  <Download className="h-4 w-4" />
-                  <span>Download Catalog</span>
+                  {/* <Download className="h-4 w-4" />
+                  <span>Download Catalog</span> */}
                 </CatalogDownloadButton>
                 <Button className="w-full flex items-center justify-center gap-2">
                   <ShoppingBag className="h-4 w-4" />

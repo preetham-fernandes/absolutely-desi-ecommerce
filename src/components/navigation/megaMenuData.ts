@@ -150,11 +150,11 @@ export const womenMenuData = {
       {
         title: "Clothing",
         links: [
-          { title: "Dresses", href: "categories/girls" },
-          { title: "Tops", href: "categories/girls" },
-          { title: "T-Shirts", href: "categories/girls" },
-          { title: "Lehengas", href: "categories/girls" },
-          { title: "Ethnic Wear", href: "categories/girls" },
+          { title: "Dresses", href: "girls" },
+          { title: "Tops", href: "girls" },
+          { title: "T-Shirts", href: "girls" },
+          { title: "Lehengas", href: "girls" },
+          { title: "Ethnic Wear", href: "girls" },
         ],
       },
       {

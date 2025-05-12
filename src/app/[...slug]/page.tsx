@@ -124,7 +124,7 @@ export default async function CategoryPage({ params, searchParams = {} }: Catego
             <li key={cat.id} className="flex items-center">
               {index < path.length - 1 ? (
                 <>
-                  <Link href={`/categories/${cat.slug}`} className="text-B2B2B2 hover:underline">
+                  <Link href={`/${cat.slug}`} className="text-B2B2B2 hover:underline">
                     {cat.name}
                   </Link>
                   <span className="mx-2">/</span>
@@ -149,7 +149,7 @@ export default async function CategoryPage({ params, searchParams = {} }: Catego
             {subcategories.map((subcat) => (
               <Link
                 key={subcat.id}
-                href={`/categories/${subcat.slug}`}
+                href={`/${subcat.slug}`}
                 className="p-2 border rounded-md hover:bg-F7F7F7 text-center text-sm transition-colors"
               >
                 {subcat.name}

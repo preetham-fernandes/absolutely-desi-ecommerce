@@ -36,7 +36,7 @@ export function Header() {
               megaMenu={<MegaMenu sections={menMenuData.sections} featuredItems={menMenuData.featuredItems} />}
             />
             <NavItem title="Boys" href="/boys" megaMenu={<MegaMenu sections={boysMenuData.sections} />} />
-            <NavItem title="Girls" href="/categories/girls" megaMenu={<MegaMenu sections={girlsMenuData.sections} />} />
+            <NavItem title="Girls" href="/girls" megaMenu={<MegaMenu sections={girlsMenuData.sections} />} />
             <NavItem
               title="Accessories"
               href="/accessories"

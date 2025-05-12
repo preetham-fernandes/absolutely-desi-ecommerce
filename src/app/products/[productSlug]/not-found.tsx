@@ -11,25 +11,25 @@ export default function NotFound() {
         <p>You might want to check out these popular categories:</p>
         <div className="flex flex-wrap justify-center gap-4 mt-6">
           <Link 
-            href="/categories/womens-saree" 
+            href="/womens-saree" 
             className="px-4 py-2 bg-indigo-100 text-indigo-700 rounded hover:bg-indigo-200"
           >
             Women's Sarees
           </Link>
           <Link 
-            href="/categories/womens-kurta" 
+            href="/womens-kurta" 
             className="px-4 py-2 bg-indigo-100 text-indigo-700 rounded hover:bg-indigo-200"
           >
             Women's Kurtas
           </Link>
           <Link 
-            href="/categories/mens-kurta" 
+            href="/mens-kurta" 
             className="px-4 py-2 bg-indigo-100 text-indigo-700 rounded hover:bg-indigo-200"
           >
             Men's Kurtas
           </Link>
           <Link 
-            href="/categories/girls-jumpsuit" 
+            href="/girls-jumpsuit" 
             className="px-4 py-2 bg-indigo-100 text-indigo-700 rounded hover:bg-indigo-200"
           >
             Girls' Jumpsuits

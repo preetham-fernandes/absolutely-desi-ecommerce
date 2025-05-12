@@ -1,6 +1,3 @@
-// App.tsx
-"use client";
-
 import React from "react";
 import { Header } from "@/components/mainpageC/Header";
 import {Carousel} from "@/components/mainpageC/Carousel"

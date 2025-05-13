@@ -95,18 +95,17 @@ export default function Sidebar() {
   };
 
   return (
-    <aside className="w-64 md:w-64 border-r border-border bg-card h-full ">
-      <div className="py-4 px-3">
-        
-          <div className="flex items-center mb-6 px-2">
-            <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center text-primary mr-3">
-              <User className="h-5 w-5" />
-            </div>
-            <div>
-              <h3 className="font-medium">Admin </h3>
-              <p className="text-xs text-muted-foreground">admin@gmail.com</p>
-            </div>
+    <aside className="w-64 md:w-64 border-r border-zinc-800 bg-black h-full">
+      <div className="py-6 px-4">
+        <div className="flex items-center mb-8 px-2">
+          <div className="h-10 w-10 rounded-full bg-tan/20 flex items-center justify-center text-tan mr-3">
+            <User className="h-5 w-5" />
           </div>
+          <div>
+            <h3 className="font-serif text-white font-medium">Admin Portal</h3>
+            <p className="text-xs text-gray-400">admin@absolutelydesi.com</p>
+          </div>
+        </div>
         
         <nav className="space-y-1">
           {navItems.map((item) => {
@@ -122,16 +121,16 @@ export default function Sidebar() {
                     className={cn(
                       "flex items-center w-full rounded-md px-3 py-2 text-sm font-medium transition-colors",
                       isActive 
-                        ? "bg-accent text-accent-foreground" 
-                        : "hover:bg-accent/50 hover:text-accent-foreground"
+                        ? "bg-tan/20 text-tan" 
+                        : "text-gray-300 hover:bg-zinc-900 hover:text-teal"
                     )}
                   >
-                    <span className="mr-3">{item.icon}</span>
+                    <span className={`mr-3 ${isActive ? 'text-tan' : 'text-teal'}`}>{item.icon}</span>
                     <span className="flex-1 text-left">{item.title}</span>
                     {isOpen ? (
-                      <ChevronDown className="h-4 w-4" />
+                      <ChevronDown className={`h-4 w-4 ${isActive ? 'text-tan' : 'text-teal'}`} />
                     ) : (
-                      <ChevronRight className="h-4 w-4" />
+                      <ChevronRight className={`h-4 w-4 ${isActive ? 'text-tan' : 'text-teal'}`} />
                     )}
                   </button>
                 ) : (
@@ -140,11 +139,11 @@ export default function Sidebar() {
                     className={cn(
                       "flex items-center rounded-md px-3 py-2 text-sm font-medium transition-colors",
                       isActive 
-                        ? "bg-accent text-accent-foreground" 
-                        : "hover:bg-accent/50 hover:text-accent-foreground"
+                        ? "bg-tan/20 text-tan" 
+                        : "text-gray-300 hover:bg-zinc-900 hover:text-teal"
                     )}
                   >
-                    <span className="mr-3">{item.icon}</span>
+                    <span className={`mr-3 ${isActive ? 'text-tan' : 'text-teal'}`}>{item.icon}</span>
                     <span>{item.title}</span>
                   </Link>
                 )}
@@ -161,11 +160,11 @@ export default function Sidebar() {
                           className={cn(
                             "flex items-center rounded-md px-3 py-2 text-sm font-medium transition-colors",
                             isSubActive 
-                              ? "bg-accent text-accent-foreground" 
-                              : "hover:bg-accent/50 hover:text-accent-foreground"
+                              ? "bg-tan/20 text-tan" 
+                              : "text-gray-300 hover:bg-zinc-900 hover:text-teal"
                           )}
                         >
-                          <span className="mr-3">{subItem.icon}</span>
+                          <span className={`mr-3 ${isSubActive ? 'text-tan' : 'text-teal'}`}>{subItem.icon}</span>
                           <span>{subItem.title}</span>
                         </Link>
                       );

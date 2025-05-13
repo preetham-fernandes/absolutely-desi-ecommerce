@@ -65,11 +65,11 @@ const config: Config = {
         },
         // Absolutely Desi custom colors
         'bangladesh-green': {
-          DEFAULT: 'hsl(var(--bangladesh-green))',
+          DEFAULT: 'hsl(var(--bangladesh-green))', // New #92C5C2 teal
           foreground: 'hsl(var(--bangladesh-green-foreground))'
         },
         'tan': {
-          DEFAULT: 'hsl(var(--tan))', // Now represents #D2B48C
+          DEFAULT: 'hsl(var(--tan))', // #D2B48C
           foreground: 'hsl(var(--tan-foreground))'
         },
         'luxury-black': {

@@ -123,17 +123,18 @@ const chartData = [
   { date: "2024-06-30", lehenga: 446, kurta: 400 },
 ]
 
+// Updated chart config with our custom colors
 const chartConfig = {
   visitors: {
     label: "Visitors",
   },
   lehenga: {
     label: "Lehenga",
-    color: "hsl(var(--chart-1))",
+    color: "#D2B48C", // Tan color
   },
   kurta: {
     label: "Kurta",
-    color: "hsl(var(--chart-2))",
+    color: "#C1E2DF", // Pastel teal color
   },
 } satisfies ChartConfig
 
@@ -162,14 +163,14 @@ export function ChartAreaInteractive() {
   })
 
   return (
-    <Card className="@container/card">
+    <Card className="@container/card bg-zinc-950 border border-zinc-800 text-white">
       <CardHeader className="relative">
-        <CardTitle>Total Affiliates</CardTitle>
-        <CardDescription>
+        <CardTitle className="text-tan font-serif">Product Sales</CardTitle>
+        <CardDescription className="text-gray-400">
           <span className="@[540px]/card:block hidden">
-            Total for the last 3 months
+            Total sales for the selected period
           </span>
-          <span className="@[540px]/card:hidden">Last 3 months</span>
+          <span className="@[540px]/card:hidden">Sales statistics</span>
         </CardDescription>
         <div className="absolute right-4 top-4">
           <ToggleGroup
@@ -177,33 +178,42 @@ export function ChartAreaInteractive() {
             value={timeRange}
             onValueChange={setTimeRange}
             variant="outline"
-            className="@[767px]/card:flex hidden"
+            className="@[767px]/card:flex hidden border border-zinc-800"
           >
-            <ToggleGroupItem value="90d" className="h-8 px-2.5">
+            <ToggleGroupItem 
+              value="90d" 
+              className={`h-8 px-2.5 text-xs ${timeRange === '90d' ? 'bg-tan/20 text-tan' : 'text-gray-400 hover:text-teal hover:bg-zinc-900'}`}
+            >
               Last 3 months
             </ToggleGroupItem>
-            <ToggleGroupItem value="30d" className="h-8 px-2.5">
+            <ToggleGroupItem 
+              value="30d" 
+              className={`h-8 px-2.5 text-xs ${timeRange === '30d' ? 'bg-tan/20 text-tan' : 'text-gray-400 hover:text-teal hover:bg-zinc-900'}`}
+            >
               Last 30 days
             </ToggleGroupItem>
-            <ToggleGroupItem value="7d" className="h-8 px-2.5">
+            <ToggleGroupItem 
+              value="7d" 
+              className={`h-8 px-2.5 text-xs ${timeRange === '7d' ? 'bg-tan/20 text-tan' : 'text-gray-400 hover:text-teal hover:bg-zinc-900'}`}
+            >
               Last 7 days
             </ToggleGroupItem>
           </ToggleGroup>
           <Select value={timeRange} onValueChange={setTimeRange}>
             <SelectTrigger
-              className="@[767px]/card:hidden flex w-40"
-              aria-label="Select a value"
+              className="@[767px]/card:hidden flex w-40 bg-zinc-900 border-zinc-800 text-white"
+              aria-label="Select a time range"
             >
               <SelectValue placeholder="Last 3 months" />
             </SelectTrigger>
-            <SelectContent className="rounded-xl">
-              <SelectItem value="90d" className="rounded-lg">
+            <SelectContent className="bg-zinc-900 border-zinc-800 text-white">
+              <SelectItem value="90d" className="hover:bg-zinc-800 focus:bg-zinc-800 hover:text-tan focus:text-tan">
                 Last 3 months
               </SelectItem>
-              <SelectItem value="30d" className="rounded-lg">
+              <SelectItem value="30d" className="hover:bg-zinc-800 focus:bg-zinc-800 hover:text-tan focus:text-tan">
                 Last 30 days
               </SelectItem>
-              <SelectItem value="7d" className="rounded-lg">
+              <SelectItem value="7d" className="hover:bg-zinc-800 focus:bg-zinc-800 hover:text-tan focus:text-tan">
                 Last 7 days
               </SelectItem>
             </SelectContent>
@@ -213,40 +223,41 @@ export function ChartAreaInteractive() {
       <CardContent className="px-2 pt-4 sm:px-6 sm:pt-6">
         <ChartContainer
           config={chartConfig}
-          className="aspect-auto h-[250px] w-full"
+          className="aspect-auto h-[300px] w-full"
         >
           <AreaChart data={filteredData}>
             <defs>
               <linearGradient id="fillLehenga" x1="0" y1="0" x2="0" y2="1">
                 <stop
                   offset="5%"
-                  stopColor="hsl(var(--chart-1))"
-                  stopOpacity={1.0}
+                  stopColor="#D2B48C"
+                  stopOpacity={0.8}
                 />
                 <stop
                   offset="95%"
-                  stopColor="hsl(var(--chart-1))"
+                  stopColor="#D2B48C"
                   stopOpacity={0.1}
                 />
               </linearGradient>
               <linearGradient id="fillKurta" x1="0" y1="0" x2="0" y2="1">
                 <stop
                   offset="5%"
-                  stopColor="hsl(var(--chart-2))"
+                  stopColor="#C1E2DF"
                   stopOpacity={0.8}
                 />
                 <stop
                   offset="95%"
-                  stopColor="hsl(var(--chart-2))"
+                  stopColor="#C1E2DF"
                   stopOpacity={0.1}
                 />
               </linearGradient>
             </defs>
-            <CartesianGrid vertical={false} />
+            <CartesianGrid vertical={false} stroke="#333333" strokeDasharray="3 3" />
             <XAxis
               dataKey="date"
               tickLine={false}
               axisLine={false}
+              tick={{ fill: "#999999" }}
               tickMargin={8}
               minTickGap={32}
               tickFormatter={(value) => {
@@ -261,6 +272,7 @@ export function ChartAreaInteractive() {
               cursor={false}
               content={
                 <ChartTooltipContent
+                  className="bg-zinc-900 border border-zinc-800 text-white"
                   labelFormatter={(value) => {
                     return new Date(value).toLocaleDateString("en-US", {
                       month: "short",
@@ -275,18 +287,31 @@ export function ChartAreaInteractive() {
               dataKey="kurta"
               type="natural"
               fill="url(#fillKurta)"
-              stroke="hsl(var(--chart-2))"
+              stroke="#C1E2DF"
+              strokeWidth={2}
               stackId="a"
             />
             <Area
               dataKey="lehenga"
               type="natural"
               fill="url(#fillLehenga)"
-              stroke="hsl(var(--chart-1))"
+              stroke="#D2B48C"
+              strokeWidth={2}
               stackId="a"
             />
           </AreaChart>
         </ChartContainer>
+        
+        <div className="flex justify-center space-x-6 mt-6">
+          <div className="flex items-center">
+            <span className="w-3 h-3 rounded-sm mr-2" style={{ backgroundColor: '#D2B48C' }}></span>
+            <span className="text-sm text-gray-300">Lehenga</span>
+          </div>
+          <div className="flex items-center">
+            <span className="w-3 h-3 rounded-sm mr-2" style={{ backgroundColor: '#C1E2DF' }}></span>
+            <span className="text-sm text-gray-300">Kurta</span>
+          </div>
+        </div>
       </CardContent>
     </Card>
   )

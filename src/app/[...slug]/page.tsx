@@ -4,8 +4,8 @@ import type { ProductWithVariants } from "@/lib/db/repositories/productRepo"
 import categoryService from "@/lib/services/categoryService"
 import productService from "@/lib/services/productService"
 import ProductFilters from "@/components/product/ProductFilters"
-import { Strikethrough } from "lucide-react"
-import { ThemeToggle } from "@/components/providers/theme-toggle"
+import { Header } from "@/components/mainpageC/Header"
+import { Footer } from "@/components/mainpageC/Footer"
 
 interface CategoryPageProps {
   params: {
@@ -107,115 +107,117 @@ export default async function CategoryPage({ params, searchParams = {} }: Catego
   const paginatedProducts = products.slice(startIndex, endIndex)
 
   return (
-    <div className="container mx-auto px-4 py-6">
-      <div className="flex justify-end mb-4">
-        <ThemeToggle />
-      </div>
-      {/* Breadcrumbs */}
-      <nav className="mb-8">
-        <ol className="flex text-sm">
-          <li className="flex items-center">
-            <Link href="/" className="text-B2B2B2 hover:underline">
-              Home
-            </Link>
-            <span className="mx-2">/</span>
-          </li>
-          {path.map((cat, index) => (
-            <li key={cat.id} className="flex items-center">
-              {index < path.length - 1 ? (
-                <>
-                  <Link href={`/${cat.slug}`} className="text-B2B2B2 hover:underline">
-                    {cat.name}
-                  </Link>
-                  <span className="mx-2">/</span>
-                </>
-              ) : (
-                <span className="font-medium">{cat.name}</span>
-              )}
-            </li>
-          ))}
-        </ol>
-      </nav>
-
-      <h1 className="text-3xl font-bold mb-6">{category.name}</h1>
-
-      {category.description && <p className="mb-8 text-B2B2B2">{category.description}</p>}
-
-      {/* Subcategories */}
-      {subcategories.length > 0 && (
-        <div className="mb-6">
-          <h2 className="text-lg font-semibold mb-3">Subcategories</h2>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
-            {subcategories.map((subcat) => (
-              <Link
-                key={subcat.id}
-                href={`/${subcat.slug}`}
-                className="p-2 border rounded-md hover:bg-F7F7F7 text-center text-sm transition-colors"
-              >
-                {subcat.name}
+    <>
+      <Header />
+      <div className="container mx-auto px-4 pt-20 pb-6">
+        {/* Breadcrumbs */}
+        <nav className="mb-4 mt-2">
+          <ol className="flex text-sm">
+            <li className="flex items-center">
+              <Link href="/" className="text-gray-400 hover:underline">
+                Home
               </Link>
+              <span className="mx-2">/</span>
+            </li>
+            {path.map((cat, index) => (
+              <li key={cat.id} className="flex items-center">
+                {index < path.length - 1 ? (
+                  <>
+                    <Link href={`/${cat.slug}`} className="text-gray-400 hover:underline">
+                      {cat.name}
+                    </Link>
+                    <span className="mx-2">/</span>
+                  </>
+                ) : (
+                  <span className="font-medium text-tan">{cat.name}</span>
+                )}
+              </li>
             ))}
+          </ol>
+        </nav>
+
+        <h1 className="text-3xl font-serif font-bold mb-4 text-tan">{category.name}</h1>
+
+        {category.description && <p className="mb-4 text-gray-600">{category.description}</p>}
+
+        {/* Subcategories */}
+        {subcategories.length > 0 && (
+          <div className="mb-4">
+            <h2 className="text-lg font-serif font-semibold mb-2">Subcategories</h2>
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
+              {subcategories.map((subcat) => (
+                <Link
+                  key={subcat.id}
+                  href={`/${subcat.slug}`}
+                  className="p-2 border rounded-md hover:bg-black hover:text-tan text-center text-sm transition-colors"
+                >
+                  {subcat.name}
+                </Link>
+              ))}
+            </div>
           </div>
-        </div>
-      )}
+        )}
 
-      {/* Products section with filter sidebar */}
-      <div className="flex flex-col md:flex-row gap-4">
-        {/* Filters sidebar - client component */}
-        <div className="w-full md:w-56 flex-shrink-0">
-          <ProductFilters categoryId={category.id} />
-        </div>
-
-        {/* Product grid */}
-        <div className="flex-grow">
-          <div className="flex justify-between items-center mb-3">
-            <h2 className="text-lg font-semibold">Products</h2>
-            <p className="text-B2B2B2 text-sm">
-              Showing {paginatedProducts.length} of {products.length} products
-            </p>
+        {/* Products section with filter sidebar */}
+        <div className="flex flex-col md:flex-row gap-4 mt-4">
+          {/* Filters sidebar - client component */}
+          <div className="w-full md:w-56 flex-shrink-0 bg-black p-4 text-white">
+            <h2 className="text-lg font-serif font-semibold mb-3 text-tan">Filter Products</h2>
+            <ProductFilters categoryId={category.id} />
           </div>
 
-          {products.length === 0 ? (
-            <p>No products found in this category.</p>
-          ) : (
-            <>
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
-                {paginatedProducts.map((product) => (
-                  <ProductCard key={product.id} product={product} />
-                ))}
-              </div>
+          {/* Product grid */}
+          <div className="flex-grow">
+            <div className="flex justify-between items-center mb-3">
+              <h2 className="text-lg font-serif font-semibold text-tan">Products</h2>
+              <p className="text-gray-500 text-sm">
+                Showing {paginatedProducts.length} of {products.length} products
+              </p>
+            </div>
 
-              {/* Pagination */}
-              {totalPages > 1 && (
-                <div className="flex justify-center mt-6">
-                  <div className="flex border rounded-md overflow-hidden shadow-sm">
-                    {Array.from({ length: totalPages }, (_, i) => i + 1).map((pageNum) => {
-                      // Create a new URLSearchParams object to preserve other filters
-                      const newParams = new URLSearchParams(
-                        Object.entries(searchParams).filter(([key]) => key !== "page"),
-                      )
-                      newParams.set("page", pageNum.toString())
-
-                      return (
-                        <Link
-                          key={pageNum}
-                          href={`?${newParams.toString()}`}
-                          className={`px-3 py-1.5 text-sm ${
-                            page === pageNum ? "bg-000000 text-white" : "hover:bg-F7F7F7"
-                          }`}
-                        >
-                          {pageNum}
-                        </Link>
-                      )
-                    })}
-                  </div>
+            {products.length === 0 ? (
+              <p>No products found in this category.</p>
+            ) : (
+              <>
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+                  {paginatedProducts.map((product) => (
+                    <ProductCard key={product.id} product={product} />
+                  ))}
                 </div>
-              )}
-            </>
-          )}
+
+                {/* Pagination */}
+                {totalPages > 1 && (
+                  <div className="flex justify-center mt-6">
+                    <div className="flex border rounded-md overflow-hidden shadow-sm">
+                      {Array.from({ length: totalPages }, (_, i) => i + 1).map((pageNum) => {
+                        // Create a new URLSearchParams object to preserve other filters
+                        const newParams = new URLSearchParams(
+                          Object.entries(searchParams).filter(([key]) => key !== "page"),
+                        )
+                        newParams.set("page", pageNum.toString())
+
+                        return (
+                          <Link
+                            key={pageNum}
+                            href={`?${newParams.toString()}`}
+                            className={`px-3 py-1.5 text-sm ${
+                              page === pageNum ? "bg-black text-tan" : "hover:bg-gray-200"
+                            }`}
+                          >
+                            {pageNum}
+                          </Link>
+                        )
+                      })}
+                    </div>
+                  </div>
+                )}
+              </>
+            )}
+          </div>
         </div>
       </div>
-    </div>
+      <Footer />
+    </>
   )
 }
 
@@ -246,8 +248,8 @@ function ProductCard({ product }: { product: ProductWithVariants }) {
 
   return (
     <Link href={`/products/${product.slug}`} className="block group">
-      <div className="border rounded-lg overflow-hidden hover:shadow-md transition-all duration-200 h-full">
-        <div className="aspect-square relative bg-F7F7F7">
+      <div className="border border-gray-200 rounded-lg overflow-hidden hover:shadow-md transition-all duration-200 h-full bg-white">
+        <div className="aspect-square relative bg-gray-50">
           {/* Use a div with background image instead of Next.js Image for simplicity */}
           <div
             className="w-full h-full bg-cover bg-top transition-transform duration-300 group-hover:scale-105"
@@ -256,14 +258,14 @@ function ProductCard({ product }: { product: ProductWithVariants }) {
         </div>
 
         <div className="p-3">
-          <h3 className="font-medium text-sm group-hover:text-B2B2B2 truncate">{product.name}</h3>
+          <h3 className="font-medium text-sm group-hover:text-tan truncate">{product.name}</h3>
 
           <div className="mt-1 flex flex-col">
             <div className="flex items-baseline gap-2">
-              <p className="text-base font-semibold">
+              <p className="text-base font-semibold text-tan">
                 ₹{affiliatePrice.toFixed(2)}
               </p>
-              <span className="text-sm text-B2B2B2 line-through">
+              <span className="text-sm text-gray-400 line-through">
                 ₹{regularPrice.toFixed(2)}
               </span>
             </div>

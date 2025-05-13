@@ -46,9 +46,9 @@
     --sidebar-ring: 217.2 91.2% 59.8%;
 
     /* Absolutely Desi custom colors */
-    --bangladesh-green: 178 95% 19%;
-    --bangladesh-green-foreground: 0 0% 100%;
-    --tan: 34 45% 69%; /* Updated to #D2B48C */
+    --teal: 174 30% 82%; /* #C1E2DF - New pastel teal color */
+    --teal-foreground: 0 0% 0%;
+    --tan: 34 45% 69%; /* #D2B48C */
     --tan-foreground: 0 0% 0%;
     --luxury-black: 0 0% 0%;
     --luxury-black-foreground: 0 0% 100%;
@@ -89,9 +89,9 @@
     --sidebar-ring: 217.2 91.2% 59.8%;
 
     /* Absolutely Desi custom colors - dark mode */
-    --bangladesh-green: 178 95% 19%;
-    --bangladesh-green-foreground: 0 0% 100%;
-    --tan: 34 45% 69%; /* Updated to #D2B48C */
+    --bangladesh-green: 178 95% 19%; /* #C1E2DF - New pastel teal color */
+    --teal-foreground: 0 0% 0%;
+    --tan: 34 45% 69%; /* #D2B48C */
     --tan-foreground: 0 0% 0%;
     --luxury-black: 0 0% 0%;
     --luxury-black-foreground: 0 0% 100%;
@@ -122,29 +122,30 @@
     @apply py-16 md:py-24;
   }
 
-  .luxury-header {
-    @apply text-4xl md:text-5xl lg:text-6xl font-serif font-bold tracking-wide text-bangladesh-green dark:text-white;
-  }
+.luxury-header {
+    @apply text-4xl md:text-5xl lg:text-6xl font-serif font-bold tracking-wide text-teal-500 dark:text-white;
+}
 
   .luxury-subheader {
     @apply text-2xl md:text-3xl font-serif text-gray-800 dark:text-gray-200;
   }
 
-  .luxury-button {
-    @apply bg-bangladesh-green text-white font-medium px-6 py-3 rounded-none hover:bg-opacity-90 transition-all duration-300 flex items-center gap-2;
-  }
+.luxury-button {
+    @apply bg-teal-500 text-black font-medium px-6 py-3 rounded-none hover:bg-teal-600 hover:bg-opacity-90 transition-all duration-300 flex items-center gap-2;
+}
 
-  .luxury-button-outline {
-    @apply border border-bangladesh-green text-bangladesh-green dark:border-white dark:text-white px-6 py-3 rounded-none hover:bg-bangladesh-green hover:text-white dark:hover:bg-white dark:hover:text-black transition-all;
-  }
+
+ .luxury-button-outline {
+    @apply border border-teal-500 text-teal-500 dark:border-white dark:text-white px-6 py-3 rounded-none hover:bg-teal-500 hover:text-black dark:hover:bg-white dark:hover:text-black transition-all;
+}
 
   .luxury-card {
     @apply bg-white dark:bg-gray-900 shadow-lg overflow-hidden border border-gray-200 dark:border-gray-800 transition-all duration-300 hover:shadow-xl;
   }
   
-  .luxury-overlay {
-    @apply absolute inset-0 bg-bangladesh-green/30 dark:bg-black/50 transition-opacity duration-300;
-  }
+.luxury-overlay {
+    @apply absolute inset-0 bg-teal-500 bg-opacity-30 dark:bg-black dark:bg-opacity-50 transition-opacity duration-300;
+}
 }
 
 /* Custom animations */

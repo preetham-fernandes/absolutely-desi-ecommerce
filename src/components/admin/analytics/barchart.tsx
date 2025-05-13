@@ -111,17 +111,18 @@ const chartData = [
   { date: "2024-06-30", men: 446, women: 400 },
 ]
 
+// Updated chart config with our custom colors
 const chartConfig = {
   views: {
     label: "Page Views",
   },
   men: {
-    label: "Men",
-    color: "hsl(var(--chart-1))",
+    label: "Men's Clothing",
+    color: "#D2B48C", // Tan color
   },
   women: {
-    label: "Women",
-    color: "hsl(var(--chart-2))",
+    label: "Women's Clothing",
+    color: "#C1E2DF", // Pastel teal color
   },
 } satisfies ChartConfig
 
@@ -138,11 +139,11 @@ export function BarChartComponent() {
   )
 
   return (
-    <Card>
-      <CardHeader className="flex flex-col items-stretch space-y-0 border-b p-0 sm:flex-row">
+    <Card className="bg-zinc-950 border border-zinc-800 text-white overflow-hidden">
+      <CardHeader className="flex flex-col items-stretch space-y-0 border-b border-zinc-800 p-0 sm:flex-row">
         <div className="flex flex-1 flex-col justify-center gap-1 px-6 py-5 sm:py-6">
-          <CardTitle>Bar Chart - Users</CardTitle>
-          <CardDescription>
+          <CardTitle className="text-tan">Affiliate Analytics</CardTitle>
+          <CardDescription className="text-gray-400">
             Showing total affiliates for the last 3 months
           </CardDescription>
         </div>
@@ -153,13 +154,19 @@ export function BarChartComponent() {
               <button
                 key={chart}
                 data-active={activeChart === chart}
-                className="relative z-30 flex flex-1 flex-col justify-center gap-1 border-t px-6 py-4 text-left even:border-l data-[active=true]:bg-muted/50 sm:border-l sm:border-t-0 sm:px-8 sm:py-6"
+                className={`
+                  relative z-30 flex flex-1 flex-col justify-center gap-1 
+                  border-t border-zinc-800 px-6 py-4 text-left even:border-l 
+                  sm:border-l sm:border-t-0 sm:px-8 sm:py-6
+                  ${activeChart === chart ? 'bg-zinc-900' : 'hover:bg-zinc-900/50'}
+                  transition-colors duration-200
+                `}
                 onClick={() => setActiveChart(chart)}
               >
-                <span className="text-xs text-muted-foreground">
+                <span className={`text-xs ${activeChart === chart ? 'text-tan' : 'text-gray-400'}`}>
                   {chartConfig[chart].label}
                 </span>
-                <span className="text-lg font-bold leading-none sm:text-3xl">
+                <span className={`text-lg font-bold leading-none sm:text-3xl ${activeChart === chart ? 'text-white' : 'text-gray-300'}`}>
                   {total[key as keyof typeof total].toLocaleString()}
                 </span>
               </button>
@@ -167,10 +174,10 @@ export function BarChartComponent() {
           })}
         </div>
       </CardHeader>
-      <CardContent className="px-2 sm:p-6">
+      <CardContent className="p-6 bg-zinc-950">
         <ChartContainer
           config={chartConfig}
-          className="aspect-auto h-[250px] w-full"
+          className="aspect-auto h-[300px] w-full"
         >
           <BarChart
             accessibilityLayer
@@ -178,13 +185,16 @@ export function BarChartComponent() {
             margin={{
               left: 12,
               right: 12,
+              bottom: 12,
+              top: 12,
             }}
           >
-            <CartesianGrid vertical={false} />
+            <CartesianGrid vertical={false} stroke="#333333" strokeDasharray="3 3" />
             <XAxis
               dataKey="date"
               tickLine={false}
               axisLine={false}
+              tick={{ fill: "#999999" }}
               tickMargin={8}
               minTickGap={32}
               tickFormatter={(value) => {
@@ -196,9 +206,10 @@ export function BarChartComponent() {
               }}
             />
             <ChartTooltip
+              cursor={{ fill: "rgba(0, 0, 0, 0.2)" }}
               content={
                 <ChartTooltipContent
-                  className="w-[150px]"
+                  className="w-[150px] bg-zinc-900 border border-zinc-800 text-white"
                   nameKey="views"
                   labelFormatter={(value) => {
                     return new Date(value).toLocaleDateString("en-US", {
@@ -210,7 +221,11 @@ export function BarChartComponent() {
                 />
               }
             />
-            <Bar dataKey={activeChart} fill={`var(--color-${activeChart})`} />
+            <Bar
+              dataKey={activeChart}
+              fill={chartConfig[activeChart].color}
+              radius={[4, 4, 0, 0]}
+            />
           </BarChart>
         </ChartContainer>
       </CardContent>

@@ -3,7 +3,7 @@ import Link from "next/link"
 import type { ProductWithVariants } from "@/lib/db/repositories/productRepo"
 import categoryService from "@/lib/services/categoryService"
 import productService from "@/lib/services/productService"
-import ProductFilters from "@/components/ProductFilters"
+import ProductFilters from "@/components/product/ProductFilters"
 import { Strikethrough } from "lucide-react"
 import { ThemeToggle } from "@/components/providers/theme-toggle"
 

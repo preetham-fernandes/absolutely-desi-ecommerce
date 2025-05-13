@@ -1,16 +1,20 @@
+// src/app/(auth)/login/page.tsx
 "use client"
 
 import { useState } from "react"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
+import { toast } from "sonner" // Make sure to install this package
 
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Checkbox } from "@/components/ui/checkbox"
+import { useAuth } from "@/contexts/AuthContext"
 
 const formSchema = z.object({
   email: z.string().email({
@@ -24,6 +28,8 @@ const formSchema = z.object({
 
 export default function LoginPage() {
   const [isLoading, setIsLoading] = useState(false)
+  const router = useRouter()
+  const { login } = useAuth()
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -34,15 +40,18 @@ export default function LoginPage() {
     },
   })
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsLoading(true)
-    // In a real application, you would handle the login here
-    console.log(values)
-    setTimeout(() => {
+    try {
+      await login(values.email, values.password)
+      toast.success("Logged in successfully")
+      router.push("/") // Redirect to dashboard or home page
+    } catch (error) {
+      console.error(error)
+      toast.error(error instanceof Error ? error.message : "Failed to login")
+    } finally {
       setIsLoading(false)
-      // Redirect to dashboard or home page after successful login
-      window.location.href = "/"
-    }, 1000)
+    }
   }
 
   return (

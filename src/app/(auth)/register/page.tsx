@@ -1,7 +1,14 @@
+// src/app/(auth)/register/page.tsx
 "use client";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
-import { UserPlus, Download, IndianRupeeIcon, CheckCircle, ArrowRight, Rocket, Mail, Lock, User, Phone, IndianRupee } from "lucide-react";
+import Link from "next/link";
+import { useAuth } from "@/contexts/AuthContext";
+import { toast } from "sonner"; // Make sure to install this package
+import { z } from "zod";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { UserPlus, Download, IndianRupeeIcon, CheckCircle, ArrowRight, Rocket, Mail, Lock, User, Phone } from "lucide-react";
 
 interface Step {
   title: string;
@@ -40,33 +47,52 @@ const steps: Step[] = [
   },
 ];
 
+const formSchema = z.object({
+  fullName: z.string().min(2, { message: "Full name must be at least 2 characters" }),
+  email: z.string().email({ message: "Please enter a valid email address" }),
+  phone: z.string().min(10, { message: "Phone number must be at least 10 digits" }),
+  password: z.string().min(6, { message: "Password must be at least 6 characters" }),
+  confirmPassword: z.string()
+}).refine(data => data.password === data.confirmPassword, {
+  message: "Passwords do not match",
+  path: ["confirmPassword"],
+});
+
 const Register: React.FC = () => {
   const router = useRouter();
-  const [formData, setFormData] = useState({
-    fullName: "",
-    email: "",
-    phone: "",
-    password: "",
-    confirmPassword: "",
+  const { register } = useAuth();
+  const [isLoading, setIsLoading] = useState(false);
+
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      fullName: "",
+      email: "",
+      phone: "",
+      password: "",
+      confirmPassword: "",
+    },
   });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Handle form submission
+  const onSubmit = async (data: z.infer<typeof formSchema>) => {
+    setIsLoading(true);
     try {
-      // your registration logic here
-  
-      // On success, redirect to login
-      router.push("/verification");
+      // Register the user
+      const result = await register(data.fullName, data.email, data.phone, data.password);
+      
+      toast.success("Registration successful! Please verify your OTP");
+      
+      // Store email in sessionStorage for verification page
+      sessionStorage.setItem('registrationEmail', data.email);
+      sessionStorage.setItem('registrationOtp', result.otp); // Only for development
+      
+      // Redirect to verification page
+      router.push('/verification');
     } catch (error) {
-      // handle error
+      console.error(error);
+      toast.error(error instanceof Error ? error.message : "Registration failed");
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -75,10 +101,6 @@ const Register: React.FC = () => {
       {/* Left Side - Affiliate Program Info */}
       <div className="hidden lg:flex lg:w-1/2 bg-black text-white p-12 flex-col justify-between">
         <div>
-          {/* <div className="inline-flex items-center gap-2 bg-red-950/30 rounded-full px-4 py-2 mb-6">
-            <Rocket className="w-4 h-4 text-red-500" />
-            <span className="text-sm font-medium">Start Earning Today</span>
-          </div> */}
           <h2 className="text-4xl font-bold mb-3 bg-clip-text text-transparent bg-gradient-to-r from-red-500 to-red-700">
             Your Journey to Success
           </h2>
@@ -113,9 +135,9 @@ const Register: React.FC = () => {
 
         <div className="mt-8 flex items-center gap-4 text-sm text-gray-400">
           <span>Already earning with us?</span>
-          <button className="text-red-500 hover:text-red-400 transition-colors">
-            View success stories
-          </button>
+          <Link href="/login" className="text-red-500 hover:text-red-400 transition-colors">
+            Sign in
+          </Link>
         </div>
       </div>
 
@@ -127,7 +149,7 @@ const Register: React.FC = () => {
             <p className="text-gray-400">Start your journey as an affiliate partner</p>
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
             <div>
               <label className="block text-sm font-medium text-gray-200 mb-2" htmlFor="fullName">
                 Full Name
@@ -137,14 +159,14 @@ const Register: React.FC = () => {
                 <input
                   type="text"
                   id="fullName"
-                  name="fullName"
-                  value={formData.fullName}
-                  onChange={handleChange}
+                  {...form.register("fullName")}
                   className="w-full pl-10 pr-4 py-3 bg-zinc-900 border border-zinc-800 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 text-white placeholder-gray-500"
                   placeholder="Enter your full name"
-                  required
                 />
               </div>
+              {form.formState.errors.fullName && (
+                <p className="text-red-500 text-sm mt-1">{form.formState.errors.fullName.message}</p>
+              )}
             </div>
 
             <div>
@@ -156,14 +178,14 @@ const Register: React.FC = () => {
                 <input
                   type="email"
                   id="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
+                  {...form.register("email")}
                   className="w-full pl-10 pr-4 py-3 bg-zinc-900 border border-zinc-800 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 text-white placeholder-gray-500"
                   placeholder="Enter your email"
-                  required
                 />
               </div>
+              {form.formState.errors.email && (
+                <p className="text-red-500 text-sm mt-1">{form.formState.errors.email.message}</p>
+              )}
             </div>
 
             <div>
@@ -175,14 +197,14 @@ const Register: React.FC = () => {
                 <input
                   type="tel"
                   id="phone"
-                  name="phone"
-                  value={formData.phone}
-                  onChange={handleChange}
+                  {...form.register("phone")}
                   className="w-full pl-10 pr-4 py-3 bg-zinc-900 border border-zinc-800 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 text-white placeholder-gray-500"
                   placeholder="Enter your phone number"
-                  required
                 />
               </div>
+              {form.formState.errors.phone && (
+                <p className="text-red-500 text-sm mt-1">{form.formState.errors.phone.message}</p>
+              )}
             </div>
 
             <div>
@@ -194,14 +216,14 @@ const Register: React.FC = () => {
                 <input
                   type="password"
                   id="password"
-                  name="password"
-                  value={formData.password}
-                  onChange={handleChange}
+                  {...form.register("password")}
                   className="w-full pl-10 pr-4 py-3 bg-zinc-900 border border-zinc-800 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 text-white placeholder-gray-500"
                   placeholder="Create a password"
-                  required
                 />
               </div>
+              {form.formState.errors.password && (
+                <p className="text-red-500 text-sm mt-1">{form.formState.errors.password.message}</p>
+              )}
             </div>
 
             <div>
@@ -213,30 +235,31 @@ const Register: React.FC = () => {
                 <input
                   type="password"
                   id="confirmPassword"
-                  name="confirmPassword"
-                  value={formData.confirmPassword}
-                  onChange={handleChange}
+                  {...form.register("confirmPassword")}
                   className="w-full pl-10 pr-4 py-3 bg-zinc-900 border border-zinc-800 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 text-white placeholder-gray-500"
                   placeholder="Confirm your password"
-                  required
                 />
               </div>
+              {form.formState.errors.confirmPassword && (
+                <p className="text-red-500 text-sm mt-1">{form.formState.errors.confirmPassword.message}</p>
+              )}
             </div>
 
             <button
               type="submit"
+              disabled={isLoading}
               className="w-full bg-gradient-to-r from-red-600 to-red-800 text-white py-3 rounded-lg font-medium hover:from-red-700 hover:to-red-900 transition-all duration-300 flex items-center justify-center gap-2"
             >
-              Create Account
-              <ArrowRight className="w-5 h-5" />
+              {isLoading ? "Creating Account..." : "Create Account"}
+              {!isLoading && <ArrowRight className="w-5 h-5" />}
             </button>
           </form>
 
           <p className="mt-6 text-center text-gray-400">
             Already have an account?{" "}
-            <button className="text-red-500 hover:text-red-400 font-medium">
+            <Link href="/login" className="text-red-500 hover:text-red-400 font-medium">
               Sign in
-            </button>
+            </Link>
           </p>
         </div>
       </div>

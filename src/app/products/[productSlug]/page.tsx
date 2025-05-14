@@ -1,4 +1,8 @@
-import { notFound } from "next/navigation"
+// src/app/products/[productSlug]/page.tsx
+"use client"
+
+import { useState, useEffect } from "react"
+import { useRouter } from "next/navigation"
 import Link from "next/link"
 import { ChevronRight, Download, ShoppingBag, Heart } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -7,11 +11,10 @@ import { Badge } from "@/components/ui/badge"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import ProductImageGallery from "@/components/product/ProductImageGallery"
 import CatalogDownloadButton from "@/components/product/CatalogDownloadButton"
-import productService from "@/lib/services/productService"
-import type { ProductWithVariants } from "@/lib/db/repositories/productRepo"
 import { Header } from "@/components/mainpageC/Header"
 import { Footer } from "@/components/mainpageC/Footer"
-
+import { useAuth } from "@/contexts/AuthContext"
+import { toast } from "sonner"
 
 interface ProductPageProps {
   params: {
@@ -19,17 +22,84 @@ interface ProductPageProps {
   }
 }
 
-export default async function ProductPage({ params }: ProductPageProps) {
+export default function ProductPage({ params }: ProductPageProps) {
   const { productSlug } = params
-  const product = await productService.getProductDetails(productSlug)
+  const router = useRouter()
+  const { isAuthenticated } = useAuth()
+  const [isWishlisted, setIsWishlisted] = useState(false)
+  const [product, setProduct] = useState<any>(null)
+  const [relatedProducts, setRelatedProducts] = useState<any[]>([])
+  const [loading, setLoading] = useState(true)
 
-  if (!product || !product.isActive) notFound()
+  // Fetch product details
+  useEffect(() => {
+    const fetchProductDetails = async () => {
+      try {
+        const response = await fetch(`/api/products/${productSlug}`)
+        const data = await response.json()
+        
+        if (!data.success || !data.data.product) {
+          router.push('/not-found')
+          return
+        }
+        
+        setProduct(data.data.product)
+        
+        // Fetch related products
+        const relatedResponse = await fetch(`/api/products/related?productId=${data.data.product.id}&categoryId=${data.data.product.categoryId}&limit=4`)
+        const relatedData = await relatedResponse.json()
+        
+        if (relatedData.success) {
+          setRelatedProducts(relatedData.data.products || [])
+        }
+        
+        setLoading(false)
+      } catch (error) {
+        console.error("Error fetching product:", error)
+        router.push('/not-found')
+      }
+    }
+    
+    fetchProductDetails()
+  }, [productSlug, router])
 
-  const relatedProducts = await productService.getRelatedProducts(product.id, product.categoryId, 4)
-
+  // Toggle wishlist
+  const handleWishlistToggle = () => {
+    if (!isAuthenticated) {
+      toast.error("Please login to add items to your wishlist")
+      return
+    }
+    
+    setIsWishlisted(!isWishlisted)
+    if (!isWishlisted) {
+      toast.success("Product added to wishlist")
+    } else {
+      toast.success("Product removed from wishlist")
+    }
+    
+    // Here you would make an API call to update the user's wishlist
+    // e.g., fetch('/api/wishlist/toggle', { method: 'POST', body: JSON.stringify({ productId: product.id }) })
+  }
+  
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-background text-foreground">
+        <Header />
+        <div className="container mx-auto px-4 pt-28 pb-6 flex justify-center items-center min-h-[60vh]">
+          <div className="text-center">
+            <div className="animate-pulse">Loading product details...</div>
+          </div>
+        </div>
+        <Footer />
+      </div>
+    )
+  }
+  
+  if (!product) return null
+  
   const defaultVariant = product.variants[0]
-  if (!defaultVariant) notFound()
-
+  if (!defaultVariant) return null
+  
   let imageUrls: string[] = []
   try {
     imageUrls = defaultVariant.imageUrls as unknown as string[]
@@ -40,11 +110,10 @@ export default async function ProductPage({ params }: ProductPageProps) {
   const regularPrice = Number(defaultVariant.basePrice)
   const affiliatePrice = regularPrice * 0.75
 
-  const sizeOptions = defaultVariant.size ? defaultVariant.size.split(",").map((size) => size.trim()) : []
+  const sizeOptions = defaultVariant.size ? defaultVariant.size.split(",").map((size: string) => size.trim()) : []
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      {/* Add the Header component here */}
       <Header />
 
       <div className="container mx-auto px-4 pt-20 pb-6">
@@ -85,7 +154,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
           {/* Product Images */}
-          <div className="bg-white rounded-xl overflow-hidden border border-gray-200">
+          <div className="bg-luxury-black rounded-xl overflow-hidden border border-gray-700">
             <ProductImageGallery images={imageUrls} productName={product.name} />
           </div>
 
@@ -96,11 +165,8 @@ export default async function ProductPage({ params }: ProductPageProps) {
                 <Badge variant="outline" className="text-xs px-2 py-1 border-tan">
                   {product.brand}
                 </Badge>
-                <Button variant="ghost" size="icon" className="rounded-full hover:bg-muted">
-                  <Heart className="h-5 w-5" />
-                </Button>
               </div>
-              <h1 className="text-3xl md:text-4xl font-serif font-bold mt-3 text-luxury-black">{product.name}</h1>
+              <h1 className="text-3xl md:text-4xl font-serif font-bold mt-3 text-tan">{product.name}</h1>
               <p className="text-sm text-muted-foreground mt-2">SKU: {defaultVariant.sku}</p>
             </div>
 
@@ -111,7 +177,9 @@ export default async function ProductPage({ params }: ProductPageProps) {
                 <span className="text-lg line-through text-muted-foreground">₹{regularPrice.toFixed(2)}</span>
                 <Badge className="bg-tan text-luxury-black hover:bg-tan">25% OFF</Badge>
               </div>
-              <p className="text-xs text-muted-foreground">*Affiliate price is available only for registered affiliates</p>
+              {!isAuthenticated && (
+                <p className="text-xs text-muted-foreground">*Affiliate price is available only for registered affiliates</p>
+              )}
             </div>
 
             {/* Product Options */}
@@ -152,6 +220,18 @@ export default async function ProductPage({ params }: ProductPageProps) {
               )}
             </div>
 
+            {/* Wishlist Button */}
+            <Button 
+              variant="outline" 
+              className="w-full py-3 flex items-center justify-center gap-2 border-red-400 hover:border-red-600 transition-all"
+              onClick={handleWishlistToggle}
+            >
+              <Heart 
+                className={`h-5 w-5 transition-colors ${isWishlisted ? "fill-red-500 text-red-500" : "text-red-400"}`} 
+              />
+              <span>{isWishlisted ? "Remove from Wishlist" : "Add to Wishlist"}</span>
+            </Button>
+
             {/* Tabs for Description and Details */}
             <Tabs defaultValue="description" className="w-full">
               <TabsList className="grid w-full grid-cols-2">
@@ -164,7 +244,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
               <TabsContent value="details" className="mt-4">
                 {product.attributes && product.attributes.length > 0 ? (
                   <div className="grid grid-cols-1 gap-2">
-                    {product.attributes.map((attr) => (
+                    {product.attributes.map((attr: any) => (
                       <div key={attr.id} className="flex py-2 border-b border-gray-200">
                         <span className="font-medium w-32">{formatAttributeName(attr.attributeName)}:</span>
                         <span>{attr.attributeValue}</span>
@@ -179,24 +259,38 @@ export default async function ProductPage({ params }: ProductPageProps) {
 
             {/* Buttons */}
             <div className="pt-4 space-y-4">
-              <div className="grid grid-cols-2 gap-4">
-                <CatalogDownloadButton
-                  categoryId={product.categoryId}
-                  productId={product.id}
-                  buttonText="Download Catalog"
-                  className="w-full px-6 py-3 bg-white text-luxury-black border border-bangladesh-green rounded-none hover:bg-bangladesh-green hover:text-white flex items-center justify-center gap-2 transition-all"
-                />
-                <Button className="w-full flex items-center justify-center gap-2 bg-bangladesh-green text-white rounded-none hover:bg-tan hover:text-luxury-black transition-all">
-                  <ShoppingBag className="h-4 w-4" />
-                  <span>Place Order</span>
-                </Button>
-              </div>
-              <p className="text-center text-sm text-muted-foreground">
-                *Only registered affiliates can place orders.{" "}
-                <Link href="/register" className="text-bangladesh-green hover:underline">
-                  Register now
-                </Link>
-              </p>
+              {isAuthenticated ? (
+                // Authenticated user actions
+                <div className="grid grid-cols-2 gap-4">
+                  <CatalogDownloadButton
+                    categoryId={product.categoryId}
+                    productId={product.id}
+                    buttonText="Download Catalog"
+                    className="w-full px-6 py-3 bg-white text-luxury-black border border-bangladesh-green rounded-none hover:bg-bangladesh-green hover:text-white flex items-center justify-center gap-2 transition-all"
+                  />
+                  <Button className="w-full h-full flex items-center justify-center gap-2 bg-bangladesh-green text-white rounded-none hover:bg-tan hover:text-luxury-black transition-all">
+                    <ShoppingBag className="h-4 w-4" />
+                    <span>Place Order</span>
+                  </Button>
+                </div>
+              ) : (
+                // Non-authenticated user actions
+                <div className="space-y-4">
+                  <div className="grid grid-cols-2 gap-4">
+                    <Button disabled className="w-full px-6 py-3 bg-white text-luxury-black border border-gray-300 rounded-none opacity-60 flex items-center justify-center gap-2">
+                      <Download className="h-4 w-4" />
+                      <span>Download Catalog</span>
+                    </Button>
+                    <Button disabled className="w-full h-full flex items-center justify-center gap-2 bg-gray-500 text-white rounded-none opacity-60">
+                      <ShoppingBag className="h-4 w-4" />
+                      <span>Place Order</span>
+                    </Button>
+                  </div>
+                  <Button asChild className="w-full bg-tan text-black font-medium py-3 rounded-none hover:bg-bangladesh-green hover:text-white transition-all duration-300">
+                    <Link href="/register">Register as Affiliate</Link>
+                  </Button>
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -204,23 +298,22 @@ export default async function ProductPage({ params }: ProductPageProps) {
         {/* Related Products */}
         {relatedProducts.length > 0 && (
           <div className="border-t pt-12 mt-12 border-gray-200">
-            <h2 className="text-2xl font-bold mb-8 font-serif text-luxury-black">Related Products</h2>
+            <h2 className="text-2xl font-bold mb-8 font-serif text-tan">Related Products</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
               {relatedProducts.map((product) => (
-                <RelatedProductCard key={product.id} product={product as ProductWithVariants} />
+                <RelatedProductCard key={product.id} product={product} />
               ))}
             </div>
           </div>
         )}
       </div>
       
-      {/* Add Footer component here */}
       <Footer />
     </div>
   )
 }
 
-function RelatedProductCard({ product }: { product: ProductWithVariants }) {
+function RelatedProductCard({ product }: { product: any }) {
   const firstVariant = product.variants[0]
   if (!firstVariant) return null
 
@@ -235,7 +328,7 @@ function RelatedProductCard({ product }: { product: ProductWithVariants }) {
   const regularPrice = Number(firstVariant.basePrice)
 
   return (
-    <Link href={`/product/${product.slug}`} className="block group">
+    <Link href={`/products/${product.slug}`} className="block group">
       <Card className="overflow-hidden hover:border-bangladesh-green transition-all duration-300 border border-gray-200">
         <div className="aspect-[3/4] relative bg-muted overflow-hidden">
           <div
@@ -249,7 +342,7 @@ function RelatedProductCard({ product }: { product: ProductWithVariants }) {
           </h3>
           <div className="mt-2 flex items-center justify-between">
             <p className="font-semibold">₹{regularPrice.toFixed(2)}</p>
-            <Badge variant="outline" className="text-xs border-tan text-luxury-black">
+            <Badge variant="outline" className="text-xs border-tan text-tan">
               {product.brand}
             </Badge>
           </div>

@@ -248,7 +248,7 @@ function ProductCard({ product }: { product: ProductWithVariants }) {
 
   return (
     <Link href={`/products/${product.slug}`} className="block group">
-      <div className="border border-gray-200 rounded-lg overflow-hidden hover:shadow-md transition-all duration-200 h-full bg-white">
+      <div className="border border-gray-700 rounded-lg overflow-hidden hover:shadow-md transition-all duration-200 h-full bg-luxury-black">
         <div className="aspect-square relative bg-gray-50">
           {/* Use a div with background image instead of Next.js Image for simplicity */}
           <div
